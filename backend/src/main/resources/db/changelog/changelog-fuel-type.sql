@@ -12,6 +12,6 @@ CREATE TABLE `fuel_type` (
   `deleted_at` DATE NULL DEFAULT NULL,
   `version` INTEGER,
   PRIMARY KEY (id),
-  CONSTRAINT agency_id FOREIGN KEY (agency_id) REFERENCES agency(id),
+  CONSTRAINT agency_id FOREIGN KEY (agency_id) REFERENCES agency(id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 -- rollback drop table fuel_type;
