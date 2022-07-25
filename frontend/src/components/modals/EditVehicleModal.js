@@ -11,7 +11,6 @@ import {
     Label,
     Input,
     FormText,
-    CustomInput,
 } from "reactstrap";
 
 import { connect } from "react-redux";
@@ -456,7 +455,7 @@ class EditVehicleModal extends Component {
                                 <div className="p-3 px-5">
                                     {this.props.additions.map((addition) => {
                                         return (
-                                            <CustomInput
+                                            <Input 
                                                 type="switch"
                                                 id={addition.name}
                                                 name="addition"

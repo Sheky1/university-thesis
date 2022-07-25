@@ -18,66 +18,56 @@ import Currencies from "./pages/admin/Currencies";
 import Reports from "./pages/admin/Reports";
 import SingleAgency from "./pages/admin/SingleAgency";
 
-import { Route, Switch, BrowserRouter } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
 function App() {
-    return (
-        <div>
-            <BrowserRouter>
-                <Switch>
-                    <Route
-                        exact
-                        path="/home-agency/"
-                        component={HomeAgencija}
-                    />
-                    <Route
-                        exact
-                        path="/home-agency/vehicle/:slug"
-                        component={SingleVehicle}
-                    />
-                    <Route
-                        exact
-                        path="/home-agency/reservations"
-                        component={Reseravations}
-                    />
-                    <Route
-                        exact
-                        path="/home-agency/additions"
-                        component={Additions}
-                    />
-                    <Route exact path="/home-agency/sizes" component={Sizes} />
-                    <Route exact path="/home-agency/fuel" component={Fuel} />
-                    <Route
-                        exact
-                        path="/home-agency/reports"
-                        component={ReportsAgency}
-                    />
+	return (
+		<div>
+			<Routes>
+				<Route exact path="/home-agency/" element={<HomeAgencija />} />
+				<Route
+					exact
+					path="/home-agency/vehicle/:slug"
+					element={<SingleVehicle />}
+				/>
+				<Route
+					exact
+					path="/home-agency/reservations"
+					element={<Reseravations />}
+				/>
+				<Route
+					exact
+					path="/home-agency/additions"
+					element={<Additions />}
+				/>
+				<Route exact path="/home-agency/sizes" element={<Sizes />} />
+				<Route exact path="/home-agency/fuel" element={<Fuel />} />
+				<Route
+					exact
+					path="/home-agency/reports"
+					element={<ReportsAgency />}
+				/>
 
-                    <Route exact path="/home-admin/" component={HomeAdmin} />
-                    <Route
-                        exact
-                        path="/home-admin/agency/:slug"
-                        component={SingleAgency}
-                    />
-                    <Route exact path="/home-admin/cities" component={Cities} />
-                    <Route
-                        exact
-                        path="/home-admin/currencies"
-                        component={Currencies}
-                    />
-                    <Route
-                        exact
-                        path="/home-admin/reports"
-                        component={Reports}
-                    />
+				<Route exact path="/home-admin/" element={<HomeAdmin />} />
+				<Route
+					exact
+					path="/home-admin/agency/:slug"
+					element={<SingleAgency />}
+				/>
+				<Route exact path="/home-admin/cities" element={<Cities />} />
+				<Route
+					exact
+					path="/home-admin/currencies"
+					element={<Currencies />}
+				/>
+				<Route exact path="/home-admin/reports" element={<Reports />} />
 
-                    <Route exact path="/" component={Login} />
-                    {/* <Route exact path="/forgot/" component={Forgot} /> */}
-                    <Route component={Error} />
-                </Switch>
-            </BrowserRouter>
-        </div>
-    );
+				<Route exact path="/" element={<Login />} />
+				{/* <Route exact path="/forgot/" element={<Forgot/>} /> */}
+				<Route element={<Error />} />
+			</Routes>
+		</div>
+	);
 }
 
 export default App;
