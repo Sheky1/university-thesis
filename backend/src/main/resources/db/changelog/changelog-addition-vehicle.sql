@@ -5,10 +5,10 @@
 -- precondition-sql-check expectedResult:0 select count(*) from information_schema.tables where table_name = 'addition_vehicle';
 CREATE TABLE `addition_vehicle` (
   `id` INTEGER NOT NULL AUTO_INCREMENT,
-  `addition_id` bigint UNSIGNED NOT NULL,
-  `vehicle_id` bigint UNSIGNED NOT NULL,
-  `created_date` DATE NULL DEFAULT NULL,
-  `last_modified_date` DATE NULL DEFAULT NULL,
+  `addition_id` INTEGER NOT NULL,
+  `vehicle_id` INTEGER NOT NULL,
+  `created_date` DATE,
+  `last_modified_date` DATE,
   PRIMARY KEY (id),
   CONSTRAINT addition_id FOREIGN KEY (addition_id) REFERENCES addition(id),
   CONSTRAINT vehicle_id FOREIGN KEY (vehicle_id) REFERENCES vehicle(id)

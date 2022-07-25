@@ -9,9 +9,9 @@ CREATE TABLE `agency` (
   `address` VARCHAR(255) NOT NULL,
   `logo_url` VARCHAR(255) NOT NULL,
   `city_id` INTEGER NOT NULL,
-  `created_date` DATE NULL DEFAULT NULL,
-  `last_modified_date` DATE NULL DEFAULT NULL,
-  `deleted_at` DATE NULL DEFAULT NULL,
+  `created_date` DATE,
+  `last_modified_date` DATE,
+  `deleted_at` DATE DEFAULT NULL,
   `version` INTEGER,
   PRIMARY KEY (id),
   CONSTRAINT city_id FOREIGN KEY (city_id) REFERENCES city(id)

@@ -6,9 +6,9 @@
 CREATE TABLE `city` (
   `id` INTEGER NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NOT NULL,
-  `created_date` DATE NULL DEFAULT NULL,
-  `last_modified_date` DATE NULL DEFAULT NULL,
-  `deleted_at` DATE NULL DEFAULT NULL,
+  `created_date` DATE,
+  `last_modified_date` DATE,
+  `deleted_at` DATE DEFAULT NULL,
   `version` INTEGER,
   PRIMARY KEY (id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

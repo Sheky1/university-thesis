@@ -6,10 +6,10 @@
 CREATE TABLE `fuel_type` (
   `id` INTEGER NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NOT NULL,
-  `agency_id` bigint UNSIGNED NOT NULL,
-  `created_date` DATE NULL DEFAULT NULL,
-  `last_modified_date` DATE NULL DEFAULT NULL,
-  `deleted_at` DATE NULL DEFAULT NULL,
+  `agency_id` INTEGER NOT NULL,
+  `created_date` DATE,
+  `last_modified_date` DATE,
+  `deleted_at` DATE DEFAULT NULL,
   `version` INTEGER,
   PRIMARY KEY (id),
   CONSTRAINT agency_id FOREIGN KEY (agency_id) REFERENCES agency(id)
