@@ -1,0 +1,41 @@
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+body {
+    color: #333;
+    background: rgb(231, 231, 231);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    line-height: 1.4;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 60%;
+
+    @media only screen and (min-width: 768px) {
+        font-size: 70%;
+    }
+
+    @media only screen and (min-width: 992px) {
+        font-size: 80%;
+    }
+
+    @media only screen and (min-width: 1200px) {
+        font-size: 100%;
+    }
+}
+
+.full-height {
+    height: 100%;
+}
+
+span {
+    margin-right: 0.5rem;
+    font-size: 1.1rem;
+    display: inline-block;
+}
