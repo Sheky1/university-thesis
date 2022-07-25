@@ -88,7 +88,7 @@ class SingleAgency extends Component {
 					"X-Api-Key": `adb69d232d124c98fe20400d9a4757d71380ba1d4200697e6817c99a30959ed2`,
 				};
 				const response = await axios.get(
-					`http://localhost:5000/api/agencies/vehicles?page=${pageNumber}&per_page=${this.state.per_page}`,
+					`http://localhost:8080/api/agencies/vehicles?page=${pageNumber}&per_page=${this.state.per_page}`,
 					{
 						params: {
 							agency_id: id,
@@ -120,7 +120,7 @@ class SingleAgency extends Component {
 					"X-Api-Key": `adb69d232d124c98fe20400d9a4757d71380ba1d4200697e6817c99a30959ed2`,
 				};
 				const response = await axios.get(
-					`http://localhost:5000/api/agencies/reservations?page=${pageNumber}&per_page=${this.state.per_page}`,
+					`http://localhost:8080/api/agencies/reservations?page=${pageNumber}&per_page=${this.state.per_page}`,
 					{
 						params: {
 							agency_id: id,

@@ -15,9 +15,10 @@ export function* login(action) {
 			password: action.payload.password,
 			type: "cms",
 		};
+		console.log(apiUser);
 		const response = yield api_axios("post", "/login", apiUser, headers);
 		// const response = yield axios.post(
-		//     "http://localhost:5000/api/login",
+		//     "http://localhost:8080/api/login",
 		//     apiUser,
 		//     {
 		//         params: {

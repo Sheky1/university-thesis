@@ -13,7 +13,7 @@ export const api_axios = (method, query, data, headers = headers_default()) => {
 	// console.log(query);
 	return axios({
 		method: `${method}`,
-		url: `http://localhost:5000/api${query}`,
+		url: `http://localhost:8080/api${query}`,
 		data: data,
 		headers: headers,
 	});
@@ -21,7 +21,7 @@ export const api_axios = (method, query, data, headers = headers_default()) => {
 
 export const params_axios = (query, params, headers = headers_default()) => {
 	// console.log(query);
-	return axios.get(`http://localhost:5000/api${query}`, {
+	return axios.get(`http://localhost:8080/api${query}`, {
 		params,
 		headers,
 	});

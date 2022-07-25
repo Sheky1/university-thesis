@@ -94,7 +94,7 @@ class SingleVehicle extends Component {
 				vehicle_id: this.state.vehicle.id,
 			};
 			const response = await axios.get(
-				"http://localhost:5000/api/reservations/vehicleReservations",
+				"http://localhost:8080/api/reservations/vehicleReservations",
 				{
 					params,
 					headers,
