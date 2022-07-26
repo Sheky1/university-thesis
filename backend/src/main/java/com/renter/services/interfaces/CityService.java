@@ -1,12 +1,11 @@
 package com.renter.services.interfaces;
 
-import com.renter.dto.request.CreateCityDto;
 import com.renter.dto.response.CityDto;
 import org.springframework.stereotype.Service;
 
 @Service
 public interface CityService {
 
-    CityDto createCity(CreateCityDto createCityDto);
+    CityDto createCity(String name);
 
 }

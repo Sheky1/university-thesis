@@ -1,6 +1,5 @@
 package com.renter.controllers.interfaces;
 
-import com.renter.dto.request.CreateCityDto;
 import com.renter.dto.response.CityDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -17,6 +16,6 @@ public interface CityAPI {
             @ApiResponse(responseCode = "201", description = "New city created",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = CityDto.class))})})
-    ResponseEntity<CityDto> createCity(CreateCityDto createCityDto);
+    ResponseEntity<CityDto> createCity(String name);
 
 }

@@ -1,7 +1,6 @@
 package com.renter.mappers;
 
 import com.renter.domain.CityEntity;
-import com.renter.dto.request.CreateCityDto;
 import com.renter.dto.response.CityDto;
 import org.springframework.stereotype.Component;
 
@@ -10,9 +9,9 @@ import java.util.ArrayList;
 @Component
 public class CityMapper {
 
-    public CityEntity toEntity(CreateCityDto createCityDto) {
+    public CityEntity toEntity(String name) {
         CityEntity cityEntity = new CityEntity();
-        cityEntity.setName(createCityDto.getName());
+        cityEntity.setName(name);
         cityEntity.setAgencies(new ArrayList<>());
         return cityEntity;
     }
@@ -20,10 +19,10 @@ public class CityMapper {
     public CityDto toDto(CityEntity cityEntity) {
         CityDto cityDto = new CityDto();
         cityDto.setId(cityEntity.getId());
-        cityDto.setName((cityDto.getName()));
-        cityDto.setCreatedDate(cityDto.getCreatedDate());
-        cityDto.setLastModifiedDate(cityDto.getLastModifiedDate());
-        cityDto.setVersion(cityDto.getVersion());
+        cityDto.setName(cityEntity.getName());
+        cityDto.setCreatedDate(cityEntity.getCreatedDate());
+        cityDto.setLastModifiedDate(cityEntity.getLastModifiedDate());
+        cityDto.setVersion(cityEntity.getVersion());
         return cityDto;
     }
 

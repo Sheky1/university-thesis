@@ -18,9 +18,9 @@ public class CityServiceImpl implements CityService {
     private final CityMapper cityMapper;
 
     @Override
-    public CityDto createCity(CreateCityDto createCityDto) {
-        if(cityRepository.findByName(createCityDto.getName()).isPresent()) throw new UniqueValueException("Neophodno je uneti ime koje nije već u sistemu.");
-        CityEntity cityEntity = cityMapper.toEntity(createCityDto);
+    public CityDto createCity(String name) {
+        if(cityRepository.findByName(name).isPresent()) throw new UniqueValueException("Neophodno je uneti ime koje nije već u sistemu.");
+        CityEntity cityEntity = cityMapper.toEntity(name);
         return cityMapper.toDto(cityRepository.save(cityEntity));
     }
 }

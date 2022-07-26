@@ -1,8 +1,8 @@
 package com.renter.controllers.implementations;
 
-import com.renter.controllers.interfaces.CityAPI;
-import com.renter.dto.response.CityDto;
-import com.renter.services.interfaces.CityService;
+import com.renter.controllers.interfaces.CurrencyAPI;
+import com.renter.dto.response.CurrencyDto;
+import com.renter.services.interfaces.CurrencyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,16 +12,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/cities")
+@RequestMapping("/currencies")
 @RequiredArgsConstructor
-public class CityController implements CityAPI {
+public class CurrencyController implements CurrencyAPI {
 
-    private final CityService cityService;
+    private final CurrencyService currencyService;
 
     @Override
     @PostMapping
-    public ResponseEntity<CityDto> createCity(@RequestParam String name) {
-        return new ResponseEntity<>(cityService.createCity(name), HttpStatus.CREATED);
+    public ResponseEntity<CurrencyDto> createCurrency(@RequestParam String name) {
+        return new ResponseEntity<>(currencyService.createCurrency(name), HttpStatus.CREATED);
     }
-
 }
