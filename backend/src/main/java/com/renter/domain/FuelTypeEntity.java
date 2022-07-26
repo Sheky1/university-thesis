@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 @Entity
-@Table(name = "city")
+@Table(name = "fuelType")
 public class FuelTypeEntity extends BaseEntity {
 
     @Id
