@@ -24,5 +24,7 @@ public class CityEntity extends BaseEntity {
     private String name;
     @OneToMany(mappedBy = "city")
     private List<AgencyEntity> agencies;
+    @Column(name = "agency_id")
+    private Integer agencyId = -1;
 
 }
