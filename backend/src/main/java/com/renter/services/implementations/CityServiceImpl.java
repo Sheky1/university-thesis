@@ -23,13 +23,13 @@ public class CityServiceImpl implements CityService {
     @Override
     public CityDto createCity(String name) {
         if (cityRepository.findByName(name).isPresent())
-            throw new UniqueValueException("Neophodno je uneti ime koje nije već u sistemu.");
+            throw new UniqueValueException("Neophodno je uneti naziv koji nije već u sistemu.");
         CityEntity cityEntity = cityMapper.toEntity(name);
         return cityMapper.toDto(cityRepository.save(cityEntity));
     }
 
     @Override
-    public CityDto updateStore(Long id, String name) {
+    public CityDto updateCity(Long id, String name) {
         CityEntity cityEntity = cityRepository.findById(id).orElseThrow(() -> new NotFoundException("Traženi grad ne postoji."));
         cityEntity.setName(name);
         return cityMapper.toDto(cityRepository.save(cityEntity));

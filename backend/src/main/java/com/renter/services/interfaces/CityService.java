@@ -10,7 +10,7 @@ import java.util.List;
 public interface CityService {
 
     CityDto createCity(String name);
-    CityDto updateStore(Long id, String name);
+    CityDto updateCity(Long id, String name);
     void deleteCity(Long id);
     List<CityDto> getAllCities(Pageable pageable);
     List<CityDto> getAllCities();

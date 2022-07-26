@@ -4,19 +4,15 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 
 import java.util.Arrays;
 
-public enum CityFields implements SortingField{
+public enum SimpleFields implements SortingField{
     ID("id"),
     NAME("name"),
-    ADDRESS("address"),
-    PHONE("phone"),
-    EMAIL("email"),
-    PIB("pib"),
     CREATED_DATE("createdDate"),
     LAST_MODIFIED("lastModified");
 
     final String field;
 
-    CityFields(String field) {
+    SimpleFields(String field) {
         this.field = field;
     }
 
@@ -26,7 +22,7 @@ public enum CityFields implements SortingField{
     }
 
     @JsonCreator
-    public static CityFields getByField(String field) {
+    public static SimpleFields getByField(String field) {
         return Arrays.stream(values()).filter(productListFields -> productListFields.getField().equals(field)).findFirst().orElseThrow(IllegalArgumentException::new);
     }
 }

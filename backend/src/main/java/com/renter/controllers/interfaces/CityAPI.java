@@ -1,7 +1,7 @@
 package com.renter.controllers.interfaces;
 
 import com.renter.dto.response.CityDto;
-import com.renter.utility.CityFields;
+import com.renter.utility.SimpleFields;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -50,7 +50,7 @@ public interface CityAPI {
     @ApiResponse(responseCode = "200", description = "All cities found",
             content = {@Content(mediaType = "application/json",
                     schema = @Schema(implementation = CityDto.class))})
-    List<CityDto> getAllCities(@RequestParam(defaultValue = "${pagination.page}") int page, @RequestParam(defaultValue = "${pagination.size}") int size, @RequestParam(defaultValue = "${sorting.field}") CityFields field, @RequestParam(defaultValue = "${sorting.direction}") Sort.Direction direction);
+    List<CityDto> getAllCities(@RequestParam(defaultValue = "${pagination.page}") int page, @RequestParam(defaultValue = "${pagination.size}") int size, @RequestParam(defaultValue = "${sorting.field}") SimpleFields field, @RequestParam(defaultValue = "${sorting.direction}") Sort.Direction direction);
 
     @Operation(summary = "Get cities", description = "This endpoint is for getting all available cities.", tags = "City")
     @ApiResponse(responseCode = "200", description = "All cities found",

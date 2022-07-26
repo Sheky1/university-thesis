@@ -3,7 +3,7 @@ package com.renter.controllers.implementations;
 import com.renter.controllers.interfaces.CityAPI;
 import com.renter.dto.response.CityDto;
 import com.renter.services.interfaces.CityService;
-import com.renter.utility.CityFields;
+import com.renter.utility.SimpleFields;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -30,20 +30,20 @@ public class CityController implements CityAPI {
     @Override
     @PutMapping("/{id}")
     public CityDto updateCity(@PathVariable Long id, @RequestParam String name) {
-        return cityService.updateStore(id, name);
+        return cityService.updateCity(id, name);
     }
 
     @Override
-    @DeleteMapping
-    public void deleteCity(@RequestParam Long id) {
+    @DeleteMapping("/{id}")
+    public void deleteCity(@PathVariable Long id) {
         cityService.deleteCity(id);
     }
 
     @Override
     @GetMapping
-    public List<CityDto> getAllCities(int page, int size, CityFields field, Sort.Direction direction) {
+    public List<CityDto> getAllCities(@RequestParam(defaultValue = "${pagination.page}") int page, @RequestParam(defaultValue = "${pagination.size}") int size, @RequestParam(defaultValue = "${sorting.field}") SimpleFields field, @RequestParam(defaultValue = "${sorting.direction}") Sort.Direction direction) {
         Pageable pageable = PageRequest.of(page, size, field.getSort(direction));
-        return  cityService.getAllCities(pageable);
+        return cityService.getAllCities(pageable);
     }
 
     @Override
