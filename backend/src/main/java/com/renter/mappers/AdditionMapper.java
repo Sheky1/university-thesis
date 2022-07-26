@@ -15,6 +15,11 @@ public class AdditionMapper {
         return additionEntity;
     }
 
+    public void updateAddition(AdditionEntity additionEntity, AdditionRequestDto additionRequestDto) {
+        additionEntity.setName(additionRequestDto.getName());
+        additionEntity.setPrice(additionRequestDto.getPrice());
+    }
+
     public AdditionDto toDto(AdditionEntity additionEntity) {
         AdditionDto additionDto = new AdditionDto();
         additionDto.setId(additionEntity.getId());

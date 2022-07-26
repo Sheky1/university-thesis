@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Data
 @NoArgsConstructor
@@ -13,11 +14,19 @@ import javax.validation.constraints.NotBlank;
 public class AdditionRequestDto {
 
     @NotBlank(message = "Name is required.")
-    @Schema(example = "Rent a car agencija")
+    @Schema(example = "Sediste za bebu")
     private String name;
 
     @NotBlank(message = "Price is required.")
     @Schema(example = "5.5")
     private Double price;
+
+    @NotNull(message = "Agency id is required.")
+    @Schema(example = "1")
+    private Long agencyId;
+
+    @NotNull(message = "Currency id is required.")
+    @Schema(example = "1")
+    private Long currencyId;
 
 }
