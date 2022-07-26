@@ -1,6 +1,6 @@
 package com.renter.controllers.interfaces;
 
-import com.renter.dto.request.FuelTypeRequestDto;
+import com.renter.dto.request.FuelSizeRequestDto;
 import com.renter.dto.response.FuelTypeDto;
 import com.renter.utility.SimpleFields;
 import io.swagger.v3.oas.annotations.Operation;
@@ -26,7 +26,7 @@ public interface FuelTypeAPI {
             @ApiResponse(responseCode = "512", description = "Fuel type with given name already exists",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = FuelTypeDto.class))})})
-    ResponseEntity<FuelTypeDto> createFuelType(FuelTypeRequestDto fuelTypeRequestDto);
+    ResponseEntity<FuelTypeDto> createFuelType(FuelSizeRequestDto fuelTypeRequestDto);
 
     @Operation(summary = "Update fuel type", description = "This endpoint is for updating a specific fuel type object. ", tags = "Fuel type")
     @ApiResponses(value = {
@@ -38,7 +38,7 @@ public interface FuelTypeAPI {
             @ApiResponse(responseCode = "512", description = "Fuel type with given name already exists",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = FuelTypeDto.class))})})
-    FuelTypeDto updateFuelType(@PathVariable Long id, @RequestParam FuelTypeRequestDto fuelTypeRequestDto);
+    FuelTypeDto updateFuelType(@PathVariable Long id, @RequestParam FuelSizeRequestDto fuelTypeRequestDto);
 
     @Operation(summary = "Delete fuel type", description = "This endpoint is for deleting a fuel type object. ", tags = "Fuel type")
     @ApiResponses(value = {

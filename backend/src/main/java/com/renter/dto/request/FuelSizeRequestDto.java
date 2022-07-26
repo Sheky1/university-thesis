@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class FuelTypeRequestDto {
+public class FuelSizeRequestDto {
 
     @NotBlank(message = "Name is required.")
     @Schema(example = "Benzin")

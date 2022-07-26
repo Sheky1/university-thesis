@@ -1,7 +1,7 @@
 package com.renter.controllers.implementations;
 
 import com.renter.controllers.interfaces.FuelTypeAPI;
-import com.renter.dto.request.FuelTypeRequestDto;
+import com.renter.dto.request.FuelSizeRequestDto;
 import com.renter.dto.response.FuelTypeDto;
 import com.renter.services.interfaces.FuelTypeService;
 import com.renter.utility.SimpleFields;
@@ -24,13 +24,13 @@ public class FuelTypeController implements FuelTypeAPI {
 
     @Override
     @PostMapping
-    public ResponseEntity<FuelTypeDto> createFuelType(@RequestBody FuelTypeRequestDto fuelTypeRequestDto) {
+    public ResponseEntity<FuelTypeDto> createFuelType(@RequestBody FuelSizeRequestDto fuelTypeRequestDto) {
         return new ResponseEntity<>(fuelTypeService.createFuelType(fuelTypeRequestDto), HttpStatus.CREATED);
     }
 
     @Override
     @PutMapping("/{id}")
-    public FuelTypeDto updateFuelType(@PathVariable Long id, @RequestBody FuelTypeRequestDto fuelTypeRequestDto) {
+    public FuelTypeDto updateFuelType(@PathVariable Long id, @RequestBody FuelSizeRequestDto fuelTypeRequestDto) {
         return fuelTypeService.updateFuelType(id, fuelTypeRequestDto);
     }
 
