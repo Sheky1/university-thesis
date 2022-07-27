@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 @Entity
-@Table(name = "city")
+@Table(name = "vehicle_size")
 public class VehicleSizeEntity extends BaseEntity {
 
     @Id

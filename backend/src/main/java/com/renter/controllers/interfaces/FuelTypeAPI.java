@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -38,7 +39,7 @@ public interface FuelTypeAPI {
             @ApiResponse(responseCode = "512", description = "Fuel type with given name already exists",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = FuelTypeDto.class))})})
-    FuelTypeDto updateFuelType(@PathVariable Long id, @RequestParam FuelSizeRequestDto fuelTypeRequestDto);
+    FuelTypeDto updateFuelType(@PathVariable Long id, @RequestBody FuelSizeRequestDto fuelTypeRequestDto);
 
     @Operation(summary = "Delete fuel type", description = "This endpoint is for deleting a fuel type object. ", tags = "Fuel type")
     @ApiResponses(value = {
