@@ -24,7 +24,7 @@ public class VehicleEntity extends BaseEntity {
     @Column
     private String transmissionType;
     @Column
-    private String registrationNumber;
+    private String registerNumber;
     @Column
     private Integer passengerCount;
     @Column
