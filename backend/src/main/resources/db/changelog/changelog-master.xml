@@ -13,4 +13,5 @@
     <include file="classpath:/db/changelog/changelog-vehicle-size.sql" />
     <include file="classpath:/db/changelog/changelog-vehicle.sql" />
     <include file="classpath:/db/changelog/changelog-addition-vehicle.sql" />
+    <include file="classpath:/db/changelog/changelog-user-domain.sql" />
 </databaseChangeLog>
