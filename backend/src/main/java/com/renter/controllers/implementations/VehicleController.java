@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,24 +25,28 @@ public class VehicleController implements VehicleAPI {
 
     @Override
     @PostMapping
+    @PreAuthorize("hasAuthority('vehicle:write')")
     public ResponseEntity<VehicleDto> createVehicle(@RequestBody VehicleRequestDto vehicleRequestDto) {
         return new ResponseEntity<>(vehicleService.createVehicle(vehicleRequestDto), HttpStatus.CREATED);
     }
 
     @Override
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('vehicle:write')")
     public VehicleDto updateVehicle(@PathVariable Long id,@RequestBody VehicleRequestDto vehicleRequestDto) {
         return vehicleService.updateVehicle(id, vehicleRequestDto);
     }
 
     @Override
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('vehicle:write')")
     public void deleteVehicle(@PathVariable Long id) {
         vehicleService.deleteVehicle(id);
     }
 
     @Override
     @GetMapping
+    @PreAuthorize("hasAuthority('vehicle:read')")
     public List<VehicleDto> getAllVehicles(@RequestParam(defaultValue = "${pagination.page}") int page, @RequestParam(defaultValue = "${pagination.size}") int size, @RequestParam(defaultValue = "${sorting.field}") VehicleFields field, @RequestParam(defaultValue = "${sorting.direction}") Sort.Direction direction) {
         Pageable pageable = PageRequest.of(page, size, field.getSort(direction));
         return vehicleService.getAllVehicles(pageable);
@@ -49,12 +54,14 @@ public class VehicleController implements VehicleAPI {
 
     @Override
     @GetMapping("/unpaged")
+    @PreAuthorize("hasAuthority('vehicle:read')")
     public List<VehicleDto> getAllVehicles() {
         return vehicleService.getAllVehicles();
     }
 
     @Override
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('vehicle:read')")
     public VehicleDto getVehicleById(@PathVariable Long id) {
         return vehicleService.getVehicleById(id);
     }

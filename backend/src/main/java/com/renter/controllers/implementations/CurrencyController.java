@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,24 +24,28 @@ public class CurrencyController implements CurrencyAPI {
 
     @Override
     @PostMapping
+    @PreAuthorize("hasAuthority('currency:write')")
     public ResponseEntity<CurrencyDto> createCurrency(@RequestParam String name) {
         return new ResponseEntity<>(currencyService.createCurrency(name), HttpStatus.CREATED);
     }
 
     @Override
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('currency:write')")
     public CurrencyDto updateCurrency(@PathVariable Long id, @RequestParam String name) {
         return currencyService.updateCurrency(id, name);
     }
 
     @Override
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('currency:write')")
     public void deleteCurrency(@PathVariable Long id) {
         currencyService.deleteCurrency(id);
     }
 
     @Override
     @GetMapping
+    @PreAuthorize("hasAuthority('currency:read')")
     public List<CurrencyDto> getAllCurrencies(@RequestParam(defaultValue = "${pagination.page}") int page, @RequestParam(defaultValue = "${pagination.size}") int size, @RequestParam(defaultValue = "${sorting.field}") SimpleFields field, @RequestParam(defaultValue = "${sorting.direction}") Sort.Direction direction) {
         Pageable pageable = PageRequest.of(page, size, field.getSort(direction));
         return currencyService.getAllCurrencies(pageable);
@@ -48,12 +53,14 @@ public class CurrencyController implements CurrencyAPI {
 
     @Override
     @GetMapping("/unpaged")
+    @PreAuthorize("hasAuthority('currency:read')")
     public List<CurrencyDto> getAllCurrencies() {
         return currencyService.getAllCurrencies();
     }
 
     @Override
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('currency:read')")
     public CurrencyDto getCurrencyById(Long id) {
         return currencyService.getCurrencyById(id);
     }

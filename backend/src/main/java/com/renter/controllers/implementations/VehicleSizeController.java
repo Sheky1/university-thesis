@@ -26,24 +26,28 @@ public class VehicleSizeController implements VehicleSizeAPI {
 
     @Override
     @PostMapping
+    @PreAuthorize("hasAuthority('vehicle-size:write')")
     public ResponseEntity<VehicleSizeDto> createVehicleSize(@RequestBody FuelSizeRequestDto fuelSizeRequestDto) {
         return new ResponseEntity<>(vehicleSizeService.createVehicleSize(fuelSizeRequestDto), HttpStatus.CREATED);
     }
 
     @Override
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('vehicle-size:write')")
     public VehicleSizeDto updateVehicleSize(@PathVariable Long id, @Valid @RequestBody FuelSizeRequestDto fuelSizeRequestDto) {
         return vehicleSizeService.updateVehicleSize(id, fuelSizeRequestDto);
     }
 
     @Override
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('vehicle-size:write')")
     public void deleteVehicleSize(@PathVariable Long id) {
         vehicleSizeService.deleteVehicleSize(id);
     }
 
     @Override
     @GetMapping
+    @PreAuthorize("hasAuthority('vehicle-size:read')")
     public List<VehicleSizeDto> getAllVehicleSize(@RequestParam(defaultValue = "${pagination.page}") int page, @RequestParam(defaultValue = "${pagination.size}") int size, @RequestParam(defaultValue = "${sorting.field}") SimpleFields field, @RequestParam(defaultValue = "${sorting.direction}") Sort.Direction direction) {
         Pageable pageable = PageRequest.of(page, size, field.getSort(direction));
         return vehicleSizeService.getAllVehicleSizes(pageable);
@@ -51,12 +55,14 @@ public class VehicleSizeController implements VehicleSizeAPI {
 
     @Override
     @GetMapping("/unpaged")
+    @PreAuthorize("hasAuthority('vehicle-size:read')")
     public List<VehicleSizeDto> getAllVehicleSize() {
         return vehicleSizeService.getAllVehicleSizes();
     }
 
     @Override
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('vehicle-size:read')")
     public VehicleSizeDto getVehicleSizeById(@PathVariable Long id) {
         return vehicleSizeService.getVehicleSizeById(id);
     }

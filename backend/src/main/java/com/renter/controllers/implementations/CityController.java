@@ -24,25 +24,28 @@ public class CityController implements CityAPI {
 
     @Override
     @PostMapping
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('city:write')")
     public ResponseEntity<CityDto> createCity(@RequestParam String name) {
         return new ResponseEntity<>(cityService.createCity(name), HttpStatus.CREATED);
     }
 
     @Override
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('city:write')")
     public CityDto updateCity(@PathVariable Long id, @RequestParam String name) {
         return cityService.updateCity(id, name);
     }
 
     @Override
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('city:write')")
     public void deleteCity(@PathVariable Long id) {
         cityService.deleteCity(id);
     }
 
     @Override
     @GetMapping
+    @PreAuthorize("hasAuthority('city:read')")
     public List<CityDto> getAllCities(@RequestParam(defaultValue = "${pagination.page}") int page, @RequestParam(defaultValue = "${pagination.size}") int size, @RequestParam(defaultValue = "${sorting.field}") SimpleFields field, @RequestParam(defaultValue = "${sorting.direction}") Sort.Direction direction) {
         Pageable pageable = PageRequest.of(page, size, field.getSort(direction));
         return cityService.getAllCities(pageable);
@@ -50,12 +53,14 @@ public class CityController implements CityAPI {
 
     @Override
     @GetMapping("/unpaged")
+    @PreAuthorize("hasAuthority('city:read')")
     public List<CityDto> getAllCities() {
         return cityService.getAllCities();
     }
 
     @Override
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('city:read')")
     public CityDto getCityById(@PathVariable Long id) {
         return cityService.getCityById(id);
     }

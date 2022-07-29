@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,24 +25,28 @@ public class AgencyController implements AgencyAPI {
 
     @Override
     @PostMapping
+    @PreAuthorize("hasAuthority('agency:write')")
     public ResponseEntity<AgencyDto> createAgency(@RequestBody AgencyRequestDto agencyRequestDto) {
         return new ResponseEntity<>(agencyService.createAgency(agencyRequestDto), HttpStatus.CREATED);
     }
 
     @Override
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('agency:write')")
     public AgencyDto updateAgency(@PathVariable Long id, @RequestBody AgencyRequestDto agencyRequestDto) {
         return agencyService.updateAgency(id, agencyRequestDto);
     }
 
     @Override
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('agency:write')")
     public void deleteAgency(@PathVariable Long id) {
         agencyService.deleteAgency(id);
     }
 
     @Override
     @GetMapping
+    @PreAuthorize("hasAuthority('agency:read')")
     public List<AgencyDto> getAllAgencies(@RequestParam(defaultValue = "${pagination.page}") int page, @RequestParam(defaultValue = "${pagination.size}") int size, @RequestParam(defaultValue = "${sorting.field}") AgencyFields field, @RequestParam(defaultValue = "${sorting.direction}") Sort.Direction direction) {
         Pageable pageable = PageRequest.of(page, size, field.getSort(direction));
         return agencyService.getAllAgencies(pageable);
@@ -49,12 +54,14 @@ public class AgencyController implements AgencyAPI {
 
     @Override
     @GetMapping("/unpaged")
+    @PreAuthorize("hasAuthority('agency:read')")
     public List<AgencyDto> getAllAgencies() {
         return agencyService.getAllAgencies();
     }
 
     @Override
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('agency:read')")
     public AgencyDto getAgencyById(@PathVariable Long id) {
         return agencyService.getAgencyById(id);
     }
