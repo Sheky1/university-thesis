@@ -29,5 +29,8 @@ public class UserDomain extends BaseDto {
     private String name;
     @Column
     private String surname;
+    @ManyToOne
+    @JoinColumn(name = "role_id", nullable = false)
+    private RoleEntity role;
 
 }

@@ -33,6 +33,11 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
         return buildResponse(HttpStatus.BAD_REQUEST.toString(), exception.getMessage(), "Bad request.", 400, exception);
     }
 
+    @ExceptionHandler(value = {UnauthorizedException.class})
+    public ResponseEntity<Object> handleException(UnauthorizedException exception) {
+        return buildResponse(HttpStatus.UNAUTHORIZED.toString(), exception.getMessage(), "Unauthorized.", 401, exception);
+    }
+
     @ExceptionHandler(value = {NotFoundException.class})
     public ResponseEntity<Object> handleException(NotFoundException exception) {
         return buildResponse(HttpStatus.NOT_FOUND.toString(), exception.getMessage(), "Not found exception.", 404, exception);
