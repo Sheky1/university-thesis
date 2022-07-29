@@ -40,8 +40,8 @@ public class AgencyController implements AgencyAPI {
     @Override
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAuthority('agency:write')")
-    public void deleteAgency(@PathVariable Long id) {
-        agencyService.deleteAgency(id);
+    public AgencyDto deleteAgency(@PathVariable Long id) {
+        return agencyService.deleteAgency(id);
     }
 
     @Override

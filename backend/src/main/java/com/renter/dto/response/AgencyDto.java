@@ -31,5 +31,7 @@ public class AgencyDto  extends BaseDto {
     private List<FuelTypeDto> fuelTypes;
     @Schema(implementation = List.class)
     private List<VehicleSizeDto> vehicleSizes;
+    @Schema(implementation = UserDto.class)
+    private UserDto user;
 
 }

@@ -32,5 +32,8 @@ public class UserDomain extends BaseDto {
     @ManyToOne
     @JoinColumn(name = "role_id", nullable = false)
     private RoleEntity role;
+    @OneToOne
+    @JoinColumn(name = "agency_id", referencedColumnName = "id")
+    private AgencyEntity agency;
 
 }

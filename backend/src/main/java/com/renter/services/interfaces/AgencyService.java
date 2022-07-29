@@ -12,7 +12,7 @@ public interface AgencyService {
 
     AgencyDto createAgency(AgencyRequestDto agencyRequestDto);
     AgencyDto updateAgency(Long id, AgencyRequestDto agencyRequestDto);
-    void deleteAgency(Long id);
+    AgencyDto deleteAgency(Long id);
     List<AgencyDto> getAllAgencies(Pageable pageable);
     List<AgencyDto> getAllAgencies();
     AgencyDto getAgencyById(Long id);

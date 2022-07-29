@@ -29,4 +29,16 @@ public class AgencyRequestDto {
     @Schema(example = "1")
     private Long cityId;
 
+    @NotBlank(message = "Username is required.")
+    @Schema(example = "dsejat")
+    private String username;
+
+    @NotBlank(message = "Email is required.")
+    @Schema(example = "dsejat@gmail.com")
+    private String email;
+
+    @NotBlank(message = "Password is required.")
+    @Schema(example = "password")
+    private String password;
+
 }

@@ -43,7 +43,7 @@ public interface AgencyAPI {
             @ApiResponse(responseCode = "200", description = "Agency deleted successfully",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema())})})
-    void deleteAgency(Long id);
+    AgencyDto deleteAgency(Long id);
 
     @Operation(summary = "Get agencies", description = "This endpoint is for getting all available agencies with pagination.", tags = "Agency")
     @ApiResponse(responseCode = "200", description = "All agencies found",

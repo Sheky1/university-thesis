@@ -1,8 +1,10 @@
 package com.renter.mappers;
 
 import com.renter.domain.AgencyEntity;
+import com.renter.domain.UserDomain;
 import com.renter.dto.request.AgencyRequestDto;
 import com.renter.dto.response.AgencyDto;
+import com.renter.dto.response.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -47,6 +49,17 @@ public class AgencyMapper {
         agencyDto.setAdditions(agencyEntity.getAdditions().stream().map(additionMapper::toDto).toList());
         agencyDto.setFuelTypes(agencyEntity.getFuelTypes().stream().map(fuelTypeMapper::toDto).toList());
         agencyDto.setVehicleSizes(agencyEntity.getVehicleSizes().stream().map(vehicleSizeMapper::toDto).toList());
+
+        UserDto userDto = new UserDto();
+        userDto.setId(agencyEntity.getUser().getId());
+        userDto.setUsername(agencyEntity.getUser().getUsername());
+        userDto.setEmail(agencyEntity.getUser().getEmail());
+        userDto.setRole(agencyEntity.getUser().getRole().getName());
+        userDto.setCreatedDate(agencyEntity.getUser().getCreatedDate());
+        userDto.setLastModifiedDate(agencyEntity.getUser().getLastModifiedDate());
+        userDto.setVersion(agencyEntity.getUser().getVersion());
+        agencyDto.setUser(userDto);
+
         return agencyDto;
     }
 

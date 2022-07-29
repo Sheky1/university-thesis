@@ -3,6 +3,7 @@ package com.renter.controllers.interfaces;
 import com.renter.dto.request.AuthUserRequest;
 import com.renter.dto.request.UserRequestDto;
 import com.renter.dto.response.UserDto;
+import com.renter.dto.response.auth.LoginDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -17,7 +18,7 @@ public interface AuthAPI {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully logged in"),
             @ApiResponse(responseCode = "401", description = "Bad credentials")})
-    ResponseEntity<Void> login(@RequestBody @Valid AuthUserRequest authUserRequest);
+    ResponseEntity<LoginDto> login(@RequestBody @Valid AuthUserRequest authUserRequest);
 
     @Operation(summary = "Register", description = "This endpoint is for registering a user.", tags = "Auth")
     @ApiResponses(value = {

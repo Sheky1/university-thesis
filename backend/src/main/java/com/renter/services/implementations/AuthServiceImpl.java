@@ -5,6 +5,7 @@ import com.renter.domain.UserDomain;
 import com.renter.dto.request.AuthUserRequest;
 import com.renter.dto.request.UserRequestDto;
 import com.renter.dto.response.UserDto;
+import com.renter.dto.response.auth.LoginDto;
 import com.renter.exceptions.NotFoundException;
 import com.renter.exceptions.UnauthorizedException;
 import com.renter.exceptions.UniqueValueException;
@@ -27,10 +28,12 @@ public class AuthServiceImpl implements AuthService {
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public SecurityUserRole login(AuthUserRequest authUserRequest) {
+    public LoginDto login(AuthUserRequest authUserRequest) {
         UserDomain user = userDomainRepository.findByUsername(authUserRequest.getUsername()).orElseThrow(() -> new UnauthorizedException("Korisnik sa zadatim kredencijalima ne postoji."));
         if(!passwordEncoder.matches(authUserRequest.getPassword(), user.getPassword())) throw new UnauthorizedException("Korisnik sa zadatim kredencijalima ne postoji.");
-        return SecurityUserRole.valueOf(user.getRole().getName());
+        LoginDto loginDto = new LoginDto();
+        loginDto.setUser(userMapper.toDto(user));
+        return loginDto;
     }
 
     @Override
