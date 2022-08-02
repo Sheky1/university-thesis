@@ -58,5 +58,7 @@ public class VehicleEntity extends BaseEntity {
             joinColumns = @JoinColumn(name = "vehicle_id"),
             inverseJoinColumns = @JoinColumn(name = "addition_id"))
     List<AdditionEntity> additions;
+    @OneToMany(mappedBy = "vehicle")
+    private List<ImageEntity> images;
 
 }

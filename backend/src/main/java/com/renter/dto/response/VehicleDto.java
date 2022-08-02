@@ -41,7 +41,11 @@ public class VehicleDto extends BaseDto {
     private CurrencyDto currency;
     @Schema(implementation = VehicleSizeDto.class)
     private VehicleSizeDto vehicleSize;
+    @Schema(implementation = FuelTypeDto.class)
+    private FuelTypeDto fuelType;
     @Schema(implementation = List.class)
     private List<AdditionDto> additions;
+    @Schema(implementation = List.class)
+    private List<ImageDto> images;
 
 }

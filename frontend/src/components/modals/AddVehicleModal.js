@@ -84,34 +84,37 @@ class AddVehicleModal extends Component {
   };
 
   fileSelectedHandler = (event) => {
-    if (
-      [...this.state.files].length + [...this.state.old_files].length < 3 &&
-      this._isMounted
-    ) {
-      const files = event.target.files;
+    console.log(event.target.files[0]);
+    console.log(event.target.files);
+    this.state.images.push(event.target.files[0]);
+    // if (
+    //   [...this.state.files].length + [...this.state.old_files].length < 3 &&
+    //   this._isMounted
+    // ) {
+    //   const files = event.target.files;
 
-      [...files].forEach(async (file, i) => {
-        if (this.fileCheckHandler(file)) {
-          await fileToBase64(file).then((result) => {
-            let image = {
-              src: result,
-              altText: `Image_${i}`,
-              caption: file.name,
-            };
-            !!(
-              [...this.state.files].length + [...this.state.old_files].length <
-              3
-            ) &&
-              this.setState({
-                files: [...this.state.files, result],
-                images: [...this.state.images, image],
-              });
-          });
-        }
-      });
-    } else {
-      event.target.value = "";
-    }
+    //   [...files].forEach(async (file, i) => {
+    //     if (this.fileCheckHandler(file)) {
+    //       await fileToBase64(file).then((result) => {
+    //         let image = {
+    //           src: result,
+    //           altText: `Image_${i}`,
+    //           caption: file.name,
+    //         };
+    //         !!(
+    //           [...this.state.files].length + [...this.state.old_files].length <
+    //           3
+    //         ) &&
+    //           this.setState({
+    //             files: [...this.state.files, result],
+    //             images: [...this.state.images, image],
+    //           });
+    //       });
+    //     }
+    //   });
+    // } else {
+    //   event.target.value = "";
+    // }
   };
 
   fileCheckHandler = (file) => {
@@ -234,7 +237,8 @@ class AddVehicleModal extends Component {
           registerNumber,
           cubicSize,
           addition_ids,
-          // files,
+          files,
+          images,
         } = this.state;
 
         passengerCount = parseInt(passengerCount);
@@ -242,6 +246,8 @@ class AddVehicleModal extends Component {
         price = parseInt(price);
         year = parseInt(year);
         cubicSize = parseInt(cubicSize);
+
+        console.log(images);
 
         const user = JSON.parse(localStorage.getItem("user"));
 
@@ -261,17 +267,31 @@ class AddVehicleModal extends Component {
           currencyId: currency.id,
           additionIds: addition_ids,
           userId: user.id,
+          image: images[0],
           // images: files,
         };
         console.log(newVehicle);
 
-        const response = await api_axios("post", `/vehicles`, newVehicle);
+        const headers = {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${localStorage.token}`,
+          Accept: "application/json",
+          "X-Api-Key": `adb69d232d124c98fe20400d9a4757d71380ba1d4200697e6817c99a30959ed2`,
+        };
+
+        const response = await api_axios(
+          "post",
+          `/vehicles`,
+          newVehicle,
+          headers
+        );
         console.log(response.data);
         this.props.addVehicle(response.data);
         this.resetState();
       }
       this.props.toggle();
     } catch (error) {
+      console.log(error);
       this.setState({
         errorText: handleErrors(error),
       });
@@ -307,7 +327,7 @@ class AddVehicleModal extends Component {
             Dodavanje vozila
           </ModalHeader>
           <ModalBody>
-            <Form>
+            <Form encType="multipart/form-data">
               <FormGroup row>
                 <Label for="name" sm={2}>
                   Naziv modela

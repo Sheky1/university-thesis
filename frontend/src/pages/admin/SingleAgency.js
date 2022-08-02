@@ -401,6 +401,7 @@ import { deleteAgency } from "../../store/actions/index";
 // };
 
 // export default connect(mapStateToProps, mapDispatchToProps)(SingleAgency);
+
 const SingleAgency = (props) => {
   const location = useLocation();
   const navigate = useNavigate();

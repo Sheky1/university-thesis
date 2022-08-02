@@ -18,6 +18,7 @@ import { api_axios } from "../../api/api";
 import * as actions from "../../store/actions/index";
 import { fileToBase64, handleErrors } from "../../store/utilities";
 import ErrorModal from "./ErrorModal";
+import { updateVehicle } from "../../store/actions/index";
 
 class EditVehicleModal extends Component {
   _isMounted = false;
@@ -230,6 +231,8 @@ class EditVehicleModal extends Component {
           addition_ids,
         } = this.state;
 
+        const user = JSON.parse(localStorage.getItem("user"));
+
         let updatedVehicle = {
           name,
           transmissionType,
@@ -243,12 +246,16 @@ class EditVehicleModal extends Component {
           cubicSize,
           vehicleSizeId: vehicleSize.id,
           fuelTypeId: fuelType.id,
-          currencyId: 1,
+          currencyId: this.props.vehicle.currency.id,
           additionIds: addition_ids,
+          userId: user.id,
         };
-        if (files.length > 0)
-          updatedVehicle = { ...updatedVehicle, images: files };
+        if (files.length > 0) {
+          // updatedVehicle = { ...updatedVehicle, images: files };
+          console.log(files);
+        }
 
+        console.log(updatedVehicle);
         const response = await api_axios(
           "put",
           `/vehicles/${this.state.vehicleId}`,

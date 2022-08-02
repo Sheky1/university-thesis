@@ -25,7 +25,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         StringHttpMessageConverter messageConverter = new StringHttpMessageConverter();
-        messageConverter.setSupportedMediaTypes(List.of(MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN, MediaType.ALL));
+        messageConverter.setSupportedMediaTypes(List.of(MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN, MediaType.ALL, MediaType.MULTIPART_FORM_DATA));
         converters.add(messageConverter);
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm a z");
         mapper.setDateFormat(df);

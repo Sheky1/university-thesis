@@ -11,6 +11,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @Service
@@ -52,6 +56,21 @@ public class VehicleServiceImpl implements VehicleService {
         vehicleEntity.setAgency(userDomain.getAgency());
         vehicleEntity.setAdditions(additions);
 
+//        List<ImageEntity> images = vehicleRequestDto.getImages().stream().map(multipartFile -> {
+//            ImageEntity imageEntity = new ImageEntity();
+//            imageEntity.setVehicle(vehicleEntity);
+//            try {
+//                byte[] bytes = multipartFile.getBytes();
+//                Path path = Paths.get("/images/" + multipartFile.getOriginalFilename()) ;
+//                Files.write(path, bytes);
+//                imageEntity.setUrl("/images/" + multipartFile.getOriginalFilename());
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//            return imageEntity;
+//        }).toList();
+//        vehicleEntity.setImages(images);
+
         return vehicleMapper.toDto(vehicleRepository.save(vehicleEntity));
     }
 
@@ -59,6 +78,30 @@ public class VehicleServiceImpl implements VehicleService {
     public VehicleDto updateVehicle(Long id, VehicleRequestDto vehicleRequestDto) {
         VehicleEntity vehicleEntity = vehicleRepository.findById(id).orElseThrow(() -> new NotFoundException("Traženo vozilo ne postoji."));
         vehicleMapper.updateVehicle(vehicleEntity, vehicleRequestDto);
+
+        VehicleSizeEntity vehicleSizeEntity = vehicleSizeRepository
+                .findById(vehicleRequestDto.getVehicleSizeId())
+                .orElseThrow(() -> new NotFoundException("Tražena veličina vozila ne postoji."));
+        FuelTypeEntity fuelTypeEntity = fuelTypeRepository
+                .findById(vehicleRequestDto.getFuelTypeId())
+                .orElseThrow(() -> new NotFoundException("Traženi tip goriva ne postoji."));
+        CurrencyEntity currencyEntity = currencyRepository
+                .findById(vehicleRequestDto.getCurrencyId())
+                .orElseThrow(() -> new NotFoundException("Tražena valuta ne postoji."));
+        UserDomain userDomain = userDomainRepository
+                .findById(vehicleRequestDto.getUserId())
+                .orElseThrow(() -> new NotFoundException("Traženi korisnik ne postoji."));
+        List<AdditionEntity> additions = vehicleRequestDto.getAdditionIds().stream()
+                .map(additionId -> additionRepository.findById(additionId).orElseThrow(() -> new NotFoundException("Traženi dodatak ne postoji.")))
+                .toList();
+
+        vehicleEntity.setVehicleSize(vehicleSizeEntity);
+        vehicleEntity.setFuelType(fuelTypeEntity);
+        vehicleEntity.setCurrency(currencyEntity);
+        vehicleEntity.setAgency(userDomain.getAgency());
+        vehicleEntity.getAdditions().clear();
+        vehicleEntity.getAdditions().addAll(additions);
+
         return vehicleMapper.toDto(vehicleRepository.save(vehicleEntity));
     }
 

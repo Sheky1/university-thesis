@@ -2,10 +2,7 @@ package com.renter.mappers;
 
 import com.renter.domain.VehicleEntity;
 import com.renter.dto.request.VehicleRequestDto;
-import com.renter.dto.response.AdditionDto;
-import com.renter.dto.response.CurrencyDto;
-import com.renter.dto.response.VehicleDto;
-import com.renter.dto.response.VehicleSizeDto;
+import com.renter.dto.response.*;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -59,9 +56,12 @@ public class VehicleMapper {
         vehicleDto.setVersion(vehicleEntity.getVersion());
         vehicleDto.setCurrency(new CurrencyDto(vehicleEntity.getCurrency().getId(), vehicleEntity.getCurrency().getName()));
         vehicleDto.setVehicleSize(new VehicleSizeDto(vehicleEntity.getVehicleSize().getId(), vehicleEntity.getVehicleSize().getName()));
+        vehicleDto.setFuelType(new FuelTypeDto(vehicleEntity.getFuelType().getId(), vehicleEntity.getFuelType().getName()));
         vehicleDto.setAdditions(vehicleEntity.getAdditions().stream()
                 .map(additionEntity -> new AdditionDto(additionEntity.getId(), additionEntity.getName(), additionEntity.getPrice(),
                         new CurrencyDto(additionEntity.getCurrency().getId(), additionEntity.getCurrency().getName()))).toList());
+        vehicleDto.setImages(vehicleEntity.getImages().stream()
+                .map(imageEntity -> new ImageDto(imageEntity.getId(), imageEntity.getUrl())).toList());
         return vehicleDto;
     }
 

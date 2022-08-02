@@ -13,6 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -24,7 +26,7 @@ public interface VehicleAPI {
             @ApiResponse(responseCode = "201", description = "New vehicle created",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = VehicleDto.class))})})
-    ResponseEntity<VehicleDto> createVehicle(@RequestBody VehicleRequestDto vehicleRequestDto);
+    ResponseEntity<VehicleDto> createVehicle(@RequestPart VehicleRequestDto vehicleRequestDto, @RequestPart MultipartFile image);
 
     @Operation(summary = "Update vehicle", description = "This endpoint is for updating a specific vehicle object. ", tags = "Vehicle")
     @ApiResponses(value = {

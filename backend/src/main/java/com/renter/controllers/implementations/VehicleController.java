@@ -10,9 +10,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -24,16 +26,18 @@ public class VehicleController implements VehicleAPI {
     private final VehicleService vehicleService;
 
     @Override
-    @PostMapping
+    @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     @PreAuthorize("hasAuthority('vehicle:write')")
-    public ResponseEntity<VehicleDto> createVehicle(@RequestBody VehicleRequestDto vehicleRequestDto) {
+    public ResponseEntity<VehicleDto> createVehicle(@RequestPart VehicleRequestDto vehicleRequestDto, @RequestPart MultipartFile image) {
+        vehicleRequestDto.setImage(image);
+        System.out.println(image);
         return new ResponseEntity<>(vehicleService.createVehicle(vehicleRequestDto), HttpStatus.CREATED);
     }
 
     @Override
     @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('vehicle:write')")
-    public VehicleDto updateVehicle(@PathVariable Long id,@RequestBody VehicleRequestDto vehicleRequestDto) {
+    public VehicleDto updateVehicle(@PathVariable Long id, @RequestBody VehicleRequestDto vehicleRequestDto) {
         return vehicleService.updateVehicle(id, vehicleRequestDto);
     }
 

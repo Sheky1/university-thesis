@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -73,5 +74,9 @@ public class VehicleRequestDto {
     @NotNull(message = "Additions are required.")
     @Schema(implementation = List.class)
     private List<Long> additionIds;
+
+    @NotNull(message = "You need to add at least one image for the vehicle.")
+    @Schema(implementation = MultipartFile.class)
+    private MultipartFile image;
 
 }
