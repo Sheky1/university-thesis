@@ -19,6 +19,6 @@ public class FuelSizeRequestDto {
 
     @NotNull(message = "Agency id is requred.")
     @Schema(example = "1")
-    private Long agencyId;
+    private Long userId;
 
 }

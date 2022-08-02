@@ -21,9 +21,9 @@ public class AdditionRequestDto {
     @Schema(example = "5.5")
     private Double price;
 
-    @NotNull(message = "Agency id is required.")
+    @NotNull(message = "User id is required.")
     @Schema(example = "1")
-    private Long agencyId;
+    private Long userId;
 
     @NotNull(message = "Currency id is required.")
     @Schema(example = "1")

@@ -1,8 +1,8 @@
 package com.renter.security.roles;
 
 public enum SecurityUserPermission {
-    VEHICLE_READ("store:read"),
-    VEHICLE_WRITE("store:write"),
+    VEHICLE_READ("vehicle:read"),
+    VEHICLE_WRITE("vehicle:write"),
     CITY_READ("city:read"),
     CITY_WRITE("city:write"),
     AGENCY_READ("agency:read"),

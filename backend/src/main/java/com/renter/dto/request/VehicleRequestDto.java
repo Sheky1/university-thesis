@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -64,5 +65,13 @@ public class VehicleRequestDto {
     @NotNull(message = "Currency id is required.")
     @Schema(example = "1")
     private Long currencyId;
+
+    @NotNull(message = "User id is required.")
+    @Schema(example = "1")
+    private Long userId;
+
+    @NotNull(message = "Additions are required.")
+    @Schema(implementation = List.class)
+    private List<Long> additionIds;
 
 }

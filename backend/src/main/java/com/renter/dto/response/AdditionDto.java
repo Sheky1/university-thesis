@@ -19,5 +19,7 @@ public class AdditionDto extends BaseDto {
     private String name;
     @Schema(example = "5.5")
     private Double price;
+    @Schema(implementation = CurrencyDto.class)
+    private CurrencyDto currency;
 
 }

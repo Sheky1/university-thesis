@@ -27,6 +27,7 @@ public class AgencyMapper {
         agencyEntity.setAdditions(new ArrayList<>());
         agencyEntity.setFuelTypes(new ArrayList<>());
         agencyEntity.setVehicleSizes(new ArrayList<>());
+        agencyEntity.setVehicles(new ArrayList<>());
         return agencyEntity;
     }
 

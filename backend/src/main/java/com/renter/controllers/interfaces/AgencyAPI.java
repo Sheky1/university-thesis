@@ -2,6 +2,7 @@ package com.renter.controllers.interfaces;
 
 import com.renter.dto.request.AgencyRequestDto;
 import com.renter.dto.response.AgencyDto;
+import com.renter.dto.response.VehicleDto;
 import com.renter.utility.AgencyFields;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -65,4 +66,13 @@ public interface AgencyAPI {
             @ApiResponse(responseCode = "404", description = "Agency with given id not found",
                     content = @Content)})
     AgencyDto getAgencyById(@PathVariable Long id);
+
+    @Operation(summary = "Get vehicles", description = "This endpoint is for getting specific agency object. ", tags = "Agency")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Agency successfully found",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = AgencyDto.class))}),
+            @ApiResponse(responseCode = "404", description = "Agency with given id not found",
+                    content = @Content)})
+    List<VehicleDto> getVehiclesInAgency(@PathVariable Long id);
 }

@@ -1,7 +1,7 @@
 package com.renter.services.implementations;
 
-import com.renter.domain.AgencyEntity;
 import com.renter.domain.FuelTypeEntity;
+import com.renter.domain.UserDomain;
 import com.renter.dto.request.FuelSizeRequestDto;
 import com.renter.dto.response.FuelTypeDto;
 import com.renter.exceptions.NotFoundException;
@@ -9,6 +9,7 @@ import com.renter.exceptions.UniqueValueException;
 import com.renter.mappers.FuelTypeMapper;
 import com.renter.repositories.AgencyRepository;
 import com.renter.repositories.FuelTypeRepository;
+import com.renter.repositories.UserDomainRepository;
 import com.renter.services.interfaces.FuelTypeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -23,22 +24,24 @@ public class FuelTypeServiceImpl implements FuelTypeService {
     private final FuelTypeRepository fuelTypeRepository;
     private final AgencyRepository agencyRepository;
     private final FuelTypeMapper fuelTypeMapper;
+    private final UserDomainRepository userDomainRepository;
 
     @Override
-    public FuelTypeDto createFuelType(FuelSizeRequestDto fuelTypeRequestDto) {
-        if (fuelTypeRepository.findByName(fuelTypeRequestDto.getName()).isPresent())
+    public FuelTypeDto createFuelType(FuelSizeRequestDto fuelSizeRequestDto) {
+        if (fuelTypeRepository.findByName(fuelSizeRequestDto.getName()).isPresent())
             throw new UniqueValueException("Neophodno je uneti naziv koji nije već u sistemu.");
-        FuelTypeEntity fuelTypeEntity = fuelTypeMapper.toEntity(fuelTypeRequestDto.getName());
-        AgencyEntity agencyEntity = agencyRepository.findById(fuelTypeRequestDto.getAgencyId()).orElseThrow(() -> new NotFoundException("Tražena agencija ne postoji."));
-        fuelTypeEntity.setAgency(agencyEntity);
+        FuelTypeEntity fuelTypeEntity = fuelTypeMapper.toEntity(fuelSizeRequestDto.getName());
+        UserDomain userDomain = userDomainRepository.findById(fuelSizeRequestDto.getUserId()).orElseThrow(() -> new NotFoundException("Tražena korisnik ne postoji."));
+        fuelTypeEntity.setAgency(userDomain.getAgency());
         return fuelTypeMapper.toDto(fuelTypeRepository.save(fuelTypeEntity));
     }
 
     @Override
-    public FuelTypeDto updateFuelType(Long id, FuelSizeRequestDto fuelTypeRequestDto) {
+    public FuelTypeDto updateFuelType(Long id, FuelSizeRequestDto fuelSizeRequestDto) {
         FuelTypeEntity fuelTypeEntity = fuelTypeRepository.findById(id).orElseThrow(() -> new NotFoundException("Traženi tip goriva ne postoji."));
-        fuelTypeEntity.setName(fuelTypeRequestDto.getName());
-        fuelTypeEntity.setAgency(agencyRepository.findById(fuelTypeRequestDto.getAgencyId()).orElseThrow(() -> new NotFoundException("Tražena agencija ne postoji.")));
+        fuelTypeEntity.setName(fuelSizeRequestDto.getName());
+        UserDomain userDomain = userDomainRepository.findById(fuelSizeRequestDto.getUserId()).orElseThrow(() -> new NotFoundException("Tražena korisnik ne postoji."));
+        fuelTypeEntity.setAgency(userDomain.getAgency());
         return fuelTypeMapper.toDto(fuelTypeRepository.save(fuelTypeEntity));
     }
 

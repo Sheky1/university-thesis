@@ -35,6 +35,8 @@ public class AgencyEntity extends BaseEntity {
     private List<FuelTypeEntity> fuelTypes;
     @OneToMany(mappedBy = "agency")
     private List<VehicleSizeEntity> vehicleSizes;
+    @OneToMany(mappedBy = "agency")
+    private List<VehicleEntity> vehicles;
     @OneToOne(mappedBy = "agency")
     private UserDomain user;
 

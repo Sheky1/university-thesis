@@ -3,6 +3,7 @@ package com.renter.mappers;
 import com.renter.domain.AdditionEntity;
 import com.renter.dto.request.AdditionRequestDto;
 import com.renter.dto.response.AdditionDto;
+import com.renter.dto.response.CurrencyDto;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -28,6 +29,7 @@ public class AdditionMapper {
         additionDto.setCreatedDate(additionEntity.getCreatedDate());
         additionDto.setLastModifiedDate(additionEntity.getLastModifiedDate());
         additionDto.setVersion(additionEntity.getVersion());
+        additionDto.setCurrency(new CurrencyDto(additionEntity.getCurrency().getId(), additionEntity.getCurrency().getName()));
         return additionDto;
     }
 

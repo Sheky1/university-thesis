@@ -2,8 +2,13 @@ package com.renter.mappers;
 
 import com.renter.domain.VehicleEntity;
 import com.renter.dto.request.VehicleRequestDto;
+import com.renter.dto.response.AdditionDto;
+import com.renter.dto.response.CurrencyDto;
 import com.renter.dto.response.VehicleDto;
+import com.renter.dto.response.VehicleSizeDto;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
 
 @Component
 public class VehicleMapper {
@@ -52,6 +57,11 @@ public class VehicleMapper {
         vehicleDto.setCreatedDate(vehicleEntity.getCreatedDate());
         vehicleDto.setLastModifiedDate(vehicleEntity.getLastModifiedDate());
         vehicleDto.setVersion(vehicleEntity.getVersion());
+        vehicleDto.setCurrency(new CurrencyDto(vehicleEntity.getCurrency().getId(), vehicleEntity.getCurrency().getName()));
+        vehicleDto.setVehicleSize(new VehicleSizeDto(vehicleEntity.getVehicleSize().getId(), vehicleEntity.getVehicleSize().getName()));
+        vehicleDto.setAdditions(vehicleEntity.getAdditions().stream()
+                .map(additionEntity -> new AdditionDto(additionEntity.getId(), additionEntity.getName(), additionEntity.getPrice(),
+                        new CurrencyDto(additionEntity.getCurrency().getId(), additionEntity.getCurrency().getName()))).toList());
         return vehicleDto;
     }
 

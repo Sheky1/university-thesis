@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -35,5 +37,11 @@ public class VehicleDto extends BaseDto {
     private Double depositPrice;
     @Schema(example = "false")
     private Boolean hasDeposit;
+    @Schema(implementation = CurrencyDto.class)
+    private CurrencyDto currency;
+    @Schema(implementation = VehicleSizeDto.class)
+    private VehicleSizeDto vehicleSize;
+    @Schema(implementation = List.class)
+    private List<AdditionDto> additions;
 
 }

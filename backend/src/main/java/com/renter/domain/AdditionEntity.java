@@ -7,6 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -29,5 +30,7 @@ public class AdditionEntity extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "currency_id", nullable = false)
     private CurrencyEntity currency;
+    @ManyToMany(mappedBy = "additions")
+    private List<VehicleEntity> vehicles;
 
 }

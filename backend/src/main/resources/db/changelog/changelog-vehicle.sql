@@ -18,6 +18,7 @@ CREATE TABLE `vehicle` (
   `vehicle_size_id` INTEGER NOT NULL,
   `fuel_type_id` INTEGER NOT NULL,
   `currency_id` INTEGER NOT NULL,
+  `agency_id` INTEGER NOT NULL,
   `created_date` DATE,
   `last_modified_date` DATE,
   `deleted_at` DATE DEFAULT NULL,
@@ -25,6 +26,7 @@ CREATE TABLE `vehicle` (
   PRIMARY KEY (id),
   CONSTRAINT vehicle_size_id FOREIGN KEY (vehicle_size_id) REFERENCES vehicle_size(id),
   CONSTRAINT fuel_type_id FOREIGN KEY (fuel_type_id) REFERENCES fuel_type(id),
-  CONSTRAINT currency_id FOREIGN KEY (currency_id) REFERENCES currency(id)
+  CONSTRAINT currency_id FOREIGN KEY (currency_id) REFERENCES currency(id),
+  CONSTRAINT agency_id FOREIGN KEY (agency_id) REFERENCES agency(id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 -- rollback drop table vehicle;

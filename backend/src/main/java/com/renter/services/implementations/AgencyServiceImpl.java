@@ -5,10 +5,12 @@ import com.renter.domain.CityEntity;
 import com.renter.domain.UserDomain;
 import com.renter.dto.request.AgencyRequestDto;
 import com.renter.dto.response.AgencyDto;
+import com.renter.dto.response.VehicleDto;
 import com.renter.exceptions.NotFoundException;
 import com.renter.exceptions.UniqueValueException;
 import com.renter.mappers.AgencyMapper;
 import com.renter.mappers.UserMapper;
+import com.renter.mappers.VehicleMapper;
 import com.renter.repositories.*;
 import com.renter.services.interfaces.AgencyService;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +32,7 @@ public class AgencyServiceImpl implements AgencyService {
     private final CityRepository cityRepository;
     private final AgencyMapper agencyMapper;
     private final UserMapper userMapper;
+    private final VehicleMapper vehicleMapper;
 
     @Override
     public AgencyDto createAgency(AgencyRequestDto agencyRequestDto) {
@@ -83,5 +86,11 @@ public class AgencyServiceImpl implements AgencyService {
     @Override
     public AgencyDto getAgencyById(Long id) {
         return agencyMapper.toDto(agencyRepository.findById(id).orElseThrow(() -> new NotFoundException("Tražena agencija ne postoji.")));
+    }
+
+    @Override
+    public List<VehicleDto> getVehiclesInAgency(Long id) {
+        AgencyEntity agencyEntity = agencyRepository.findById(id).orElseThrow(() -> new NotFoundException("Tražena agencija ne postoji."));
+        return agencyEntity.getVehicles().stream().map(vehicleMapper::toDto).toList();
     }
 }

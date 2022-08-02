@@ -7,6 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -48,5 +49,14 @@ public class VehicleEntity extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "currency_id", nullable = false)
     private CurrencyEntity currency;
+    @ManyToOne
+    @JoinColumn(name = "agency_id", nullable = false)
+    private AgencyEntity agency;
+    @ManyToMany
+    @JoinTable(
+            name = "addition_vehicle",
+            joinColumns = @JoinColumn(name = "vehicle_id"),
+            inverseJoinColumns = @JoinColumn(name = "addition_id"))
+    List<AdditionEntity> additions;
 
 }

@@ -1,129 +1,134 @@
 .btn {
-    &-primary {
-        margin-top: 15px;
-        background-color: $color-primary-light;
-        outline: none;
-        &,
-        &:link,
-        &:visited {
-            text-decoration: none;
-            padding: 1rem 7rem;
-            display: inline-block;
-            border-radius: 5px;
-            transition: all 0.2s;
-            position: relative;
-            font-size: $default-font-size;
+  &-primary {
+    margin-top: 15px;
+    background-color: $color-primary-light;
+    outline: none;
+    color: white;
 
-            // for the <button> element
-            border: none;
-            cursor: pointer;
-        }
+    &,
+    &:link,
+    &:visited {
+      text-decoration: none;
+      padding: 1rem 7rem;
+      display: inline-block;
+      border-radius: 5px;
+      transition: all 0.2s;
+      position: relative;
+      font-size: $default-font-size;
 
-        &:hover {
-            transform: translateY(-0.3rem);
-            box-shadow: 0 1rem 2rem rgba($color-black, 0.2);
-
-            &::after {
-                transform: scaleX(1.4) scaleY(1.6);
-                opacity: 0;
-            }
-        }
-
-        &:active,
-        &:focus {
-            outline: none;
-            transform: translateY(-0.1rem);
-            box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
-        }
-
-        &::after {
-            content: "";
-            display: inline-block;
-            height: 100%;
-            width: 100%;
-            border-radius: 5px;
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: -1;
-            transition: all 0.5s;
-        }
-
-        &--animated {
-            animation: moveInBottom 1s;
-            animation-delay: 0.5s;
-            animation-fill-mode: backwards;
-        }
-
-        &--white {
-            background: $color-white;
-            color: $color-grey-dark;
-
-            &::after {
-                background: $color-white;
-            }
-        }
-
-        &--green {
-            background: $color-primary;
-            color: $color-white;
-
-            &::after {
-                background: $color-primary;
-            }
-        }
+      // for the <button> element
+      border: none;
+      cursor: pointer;
     }
 
-    &-features {
-        display: inline-block;
-        text-decoration: none;
-        letter-spacing: 3px;
-        color: whitesmoke;
-        background: $color-primary-light;
-        padding: 0.4rem 0.9rem;
-        border: 3px solid $color-primary-light;
-        transition: all 0.3s linear;
-        text-transform: uppercase;
-        cursor: pointer;
+    &:hover {
+      transform: translateY(-0.3rem);
+      box-shadow: 0 1rem 2rem rgba($color-black, 0.2);
+      color: white;
 
-        &:hover {
-            background: transparent;
-            color: $color-primary-light;
-        }
+      &::after {
+        transform: scaleX(1.4) scaleY(1.6);
+        opacity: 0;
+      }
     }
 
-    &-small {
-        padding: 0.3rem 2rem;
+    &:active,
+    &:focus {
+      outline: none;
+      transform: translateY(-0.1rem);
+      box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
     }
 
-    &-vehicles {
-        padding: 0.2rem 1.2rem;
-        margin-top: 15px;
-        margin-right: 10px;
+    &::after {
+      content: "";
+      display: inline-block;
+      height: 100%;
+      width: 100%;
+      border-radius: 5px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      transition: all 0.5s;
     }
 
-    &-red {
-        background-color: rgb(207, 73, 73);
+    &--animated {
+      animation: moveInBottom 1s;
+      animation-delay: 0.5s;
+      animation-fill-mode: backwards;
     }
 
-    &-green {
-        background-color: #16b841;
+    &--white {
+      background: $color-white;
+      color: $color-grey-dark;
+
+      &::after {
+        background: $color-white;
+      }
     }
 
-    &-hidden {
-        display: none;
+    &--green {
+      background: $color-primary;
+      color: $color-white;
 
-        @media only screen and (max-width: 768px) {
-            display: block;
-        }
+      &::after {
+        background: $color-primary;
+      }
     }
+  }
+
+  &-features {
+    display: inline-block;
+    text-decoration: none;
+    letter-spacing: 3px;
+    color: whitesmoke;
+    background: $color-primary-light;
+    padding: 0.4rem 0.9rem;
+    border: 3px solid $color-primary-light;
+    transition: all 0.3s linear;
+    text-transform: uppercase;
+    cursor: pointer;
+
+    &:hover {
+      background: transparent;
+      color: $color-primary-light;
+    }
+  }
+
+  &-small {
+    padding: 0.3rem 2rem;
+    color: white;
+  }
+
+  &-vehicles {
+    padding: 0.2rem 1.2rem;
+    margin-top: 15px;
+    margin-right: 10px;
+    color: white;
+  }
+
+  &-red {
+    background-color: rgb(207, 73, 73);
+  }
+
+  &-green {
+    background-color: #16b841;
+  }
+
+  &-hidden {
+    display: none;
+
+    @media only screen and (max-width: 768px) {
+      display: block;
+    }
+  }
 }
 
 .vehicle-link {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: scale(0);
-    transition: all 0.3s linear;
-    transform: translate(-50%, -50%) scale(1);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: scale(0);
+  transition: all 0.3s linear;
+  transform: translate(-50%, -50%) scale(1);
 }

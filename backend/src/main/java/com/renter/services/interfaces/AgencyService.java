@@ -2,6 +2,7 @@ package com.renter.services.interfaces;
 
 import com.renter.dto.request.AgencyRequestDto;
 import com.renter.dto.response.AgencyDto;
+import com.renter.dto.response.VehicleDto;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -16,5 +17,6 @@ public interface AgencyService {
     List<AgencyDto> getAllAgencies(Pageable pageable);
     List<AgencyDto> getAllAgencies();
     AgencyDto getAgencyById(Long id);
+    List<VehicleDto> getVehiclesInAgency(Long id);
 
 }

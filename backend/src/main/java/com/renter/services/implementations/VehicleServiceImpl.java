@@ -5,10 +5,7 @@ import com.renter.dto.request.VehicleRequestDto;
 import com.renter.dto.response.VehicleDto;
 import com.renter.exceptions.NotFoundException;
 import com.renter.mappers.VehicleMapper;
-import com.renter.repositories.CurrencyRepository;
-import com.renter.repositories.FuelTypeRepository;
-import com.renter.repositories.VehicleRepository;
-import com.renter.repositories.VehicleSizeRepository;
+import com.renter.repositories.*;
 import com.renter.services.interfaces.VehicleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -24,17 +21,37 @@ public class VehicleServiceImpl implements VehicleService {
     private final VehicleSizeRepository vehicleSizeRepository;
     private final FuelTypeRepository fuelTypeRepository;
     private final CurrencyRepository currencyRepository;
+    private final AdditionRepository additionRepository;
+    private final AgencyRepository agencyRepository;
     private final VehicleMapper vehicleMapper;
+    private final UserDomainRepository userDomainRepository;
 
     @Override
     public VehicleDto createVehicle(VehicleRequestDto vehicleRequestDto) {
         VehicleEntity vehicleEntity = vehicleMapper.toEntity(vehicleRequestDto);
-        VehicleSizeEntity vehicleSizeEntity = vehicleSizeRepository.findById(vehicleRequestDto.getVehicleSizeId()).orElseThrow(() -> new NotFoundException("Tražena veličina vozila ne postoji."));
-        FuelTypeEntity fuelTypeEntity = fuelTypeRepository.findById(vehicleRequestDto.getFuelTypeId()).orElseThrow(() -> new NotFoundException("Traženi tip goriva ne postoji."));
-        CurrencyEntity currencyEntity = currencyRepository.findById(vehicleRequestDto.getCurrencyId()).orElseThrow(() -> new NotFoundException("Tražena valuta ne postoji."));
+
+        VehicleSizeEntity vehicleSizeEntity = vehicleSizeRepository
+                .findById(vehicleRequestDto.getVehicleSizeId())
+                .orElseThrow(() -> new NotFoundException("Tražena veličina vozila ne postoji."));
+        FuelTypeEntity fuelTypeEntity = fuelTypeRepository
+                .findById(vehicleRequestDto.getFuelTypeId())
+                .orElseThrow(() -> new NotFoundException("Traženi tip goriva ne postoji."));
+        CurrencyEntity currencyEntity = currencyRepository
+                .findById(vehicleRequestDto.getCurrencyId())
+                .orElseThrow(() -> new NotFoundException("Tražena valuta ne postoji."));
+        UserDomain userDomain = userDomainRepository
+                .findById(vehicleRequestDto.getUserId())
+                .orElseThrow(() -> new NotFoundException("Traženi korisnik ne postoji."));
+        List<AdditionEntity> additions = vehicleRequestDto.getAdditionIds().stream()
+                .map(additionId -> additionRepository.findById(additionId).orElseThrow(() -> new NotFoundException("Traženi dodatak ne postoji.")))
+                .toList();
+
         vehicleEntity.setVehicleSize(vehicleSizeEntity);
         vehicleEntity.setFuelType(fuelTypeEntity);
         vehicleEntity.setCurrency(currencyEntity);
+        vehicleEntity.setAgency(userDomain.getAgency());
+        vehicleEntity.setAdditions(additions);
+
         return vehicleMapper.toDto(vehicleRepository.save(vehicleEntity));
     }
 

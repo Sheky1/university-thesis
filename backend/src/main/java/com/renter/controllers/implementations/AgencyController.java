@@ -3,6 +3,7 @@ package com.renter.controllers.implementations;
 import com.renter.controllers.interfaces.AgencyAPI;
 import com.renter.dto.request.AgencyRequestDto;
 import com.renter.dto.response.AgencyDto;
+import com.renter.dto.response.VehicleDto;
 import com.renter.services.interfaces.AgencyService;
 import com.renter.utility.AgencyFields;
 import lombok.RequiredArgsConstructor;
@@ -64,5 +65,12 @@ public class AgencyController implements AgencyAPI {
     @PreAuthorize("hasAuthority('agency:read')")
     public AgencyDto getAgencyById(@PathVariable Long id) {
         return agencyService.getAgencyById(id);
+    }
+
+    @Override
+    @GetMapping("/{id}/vehicles")
+    @PreAuthorize("hasAuthority('vehicle:read')")
+    public List<VehicleDto> getVehiclesInAgency(@PathVariable Long id) {
+        return agencyService.getVehiclesInAgency(id);
     }
 }
