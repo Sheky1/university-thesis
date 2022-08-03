@@ -10,6 +10,7 @@ import com.renter.services.interfaces.VehicleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -29,8 +30,10 @@ public class VehicleServiceImpl implements VehicleService {
     private final AgencyRepository agencyRepository;
     private final VehicleMapper vehicleMapper;
     private final UserDomainRepository userDomainRepository;
+    private final ImageRepository imageRepository;
 
     @Override
+    @Transactional
     public VehicleDto createVehicle(VehicleRequestDto vehicleRequestDto) {
         VehicleEntity vehicleEntity = vehicleMapper.toEntity(vehicleRequestDto);
 
@@ -56,22 +59,24 @@ public class VehicleServiceImpl implements VehicleService {
         vehicleEntity.setAgency(userDomain.getAgency());
         vehicleEntity.setAdditions(additions);
 
-//        List<ImageEntity> images = vehicleRequestDto.getImages().stream().map(multipartFile -> {
-//            ImageEntity imageEntity = new ImageEntity();
-//            imageEntity.setVehicle(vehicleEntity);
-//            try {
-//                byte[] bytes = multipartFile.getBytes();
-//                Path path = Paths.get("/images/" + multipartFile.getOriginalFilename()) ;
-//                Files.write(path, bytes);
-//                imageEntity.setUrl("/images/" + multipartFile.getOriginalFilename());
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//            return imageEntity;
-//        }).toList();
-//        vehicleEntity.setImages(images);
+        List<ImageEntity> images = vehicleRequestDto.getImages().stream().map(multipartFile -> {
+            ImageEntity imageEntity = new ImageEntity();
+            imageEntity.setVehicle(vehicleEntity);
+            try {
+                byte[] bytes = multipartFile.getBytes();
+                Path path = Paths.get("/Users/dsejat/Documents/images/" + multipartFile.getOriginalFilename()) ;
+                Files.write(path, bytes);
+                imageEntity.setUrl("/Users/dsejat/Documents/images/" + multipartFile.getOriginalFilename());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return imageEntity;
+        }).toList();
+        VehicleEntity newVehicle = vehicleRepository.save(vehicleEntity);
+        vehicleEntity.setImages(images);
+        imageRepository.saveAll(images);
 
-        return vehicleMapper.toDto(vehicleRepository.save(vehicleEntity));
+        return vehicleMapper.toDto(newVehicle);
     }
 
     @Override

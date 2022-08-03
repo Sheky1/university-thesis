@@ -19,6 +19,7 @@ import { api_axios } from "../../api/api";
 import * as actions from "../../store/actions/index";
 import { fileToBase64, handleErrors } from "../../store/utilities";
 import ErrorModal from "./ErrorModal";
+import axios from "axios";
 
 class AddVehicleModal extends Component {
   _isMounted = false;
@@ -251,6 +252,9 @@ class AddVehicleModal extends Component {
 
         const user = JSON.parse(localStorage.getItem("user"));
 
+        const formData = new FormData();
+        // formData.append("image", images[0]);
+
         const newVehicle = {
           name,
           transmissionType,
@@ -267,27 +271,50 @@ class AddVehicleModal extends Component {
           currencyId: currency.id,
           additionIds: addition_ids,
           userId: user.id,
-          image: images[0],
+          // images,
+          // image: formData,
           // images: files,
         };
         console.log(newVehicle);
+        console.log(formData);
+        // formData.append("vehicleRequestDto", newVehicle);
+        for (var key in newVehicle) {
+          formData.append(key, newVehicle[key]);
+        }
+
+        for (var x = 0; x < images.length; x++) {
+          formData.append("images[]", images[x]);
+        }
 
         const headers = {
-          "Content-Type": "multipart/form-data",
+          "Content-Type":
+            "multipart/form-data; boundary=----WebKitFormBoundaryY4U7hoZMlQAqLCEr",
           Authorization: `Bearer ${localStorage.token}`,
           Accept: "application/json",
           "X-Api-Key": `adb69d232d124c98fe20400d9a4757d71380ba1d4200697e6817c99a30959ed2`,
         };
+        // const response = await api_axios(
+        //   "post",
+        //   `/vehicles/image`,
+        //   formData,
+        //   headers
+        // );
+        const response = await axios({
+          method: `post`,
+          url: `http://localhost:8080/api/vehicles`,
+          data: formData,
+          headers: headers,
+        });
 
-        const response = await api_axios(
-          "post",
-          `/vehicles`,
-          newVehicle,
-          headers
-        );
+        // const response = await api_axios(
+        //   "post",
+        //   `/vehicles`,
+        //   newVehicle,
+        //   headers
+        // );
+        // this.props.addVehicle(response.data);
+        // this.resetState();
         console.log(response.data);
-        this.props.addVehicle(response.data);
-        this.resetState();
       }
       this.props.toggle();
     } catch (error) {
@@ -327,6 +354,20 @@ class AddVehicleModal extends Component {
             Dodavanje vozila
           </ModalHeader>
           <ModalBody>
+            <form
+              method="post"
+              encType="multipart/form-data"
+              action="http://localhost:8080/api/vehicles/image"
+            >
+              <input
+                type="file"
+                name="imageFile"
+                onChange={(e) => {
+                  console.log(e.target.files[0]);
+                }}
+              />
+              <input type="submit" value="Upload" />
+            </form>
             <Form encType="multipart/form-data">
               <FormGroup row>
                 <Label for="name" sm={2}>

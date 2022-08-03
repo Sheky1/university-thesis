@@ -32,17 +32,17 @@ export default function VehiclePreview(props) {
     setActiveIndex(newIndex);
   };
 
-  // const slides = props.vehicle.images.map((image) => {
-  //     return (
-  //         <CarouselItem
-  //             onExiting={() => setAnimating(true)}
-  //             onExited={() => setAnimating(false)}
-  //             key={image.url}
-  //         >
-  //             <img src={image.url} alt={"Vozilo"} />
-  //         </CarouselItem>
-  //     );
-  // });
+  const slides = props.vehicle.images.map((image) => {
+    return (
+      <CarouselItem
+        onExiting={() => setAnimating(true)}
+        onExited={() => setAnimating(false)}
+        key={image.url}
+      >
+        <img src={image.url} alt={"Vozilo"} />
+      </CarouselItem>
+    );
+  });
   console.log(props);
 
   return (
@@ -60,7 +60,7 @@ export default function VehiclePreview(props) {
             <div className="vehicle-preview-container">
               <Col lg="6" xs="12" className="pl-0">
                 <div className="vehicle-preview-left">
-                  {/* <Carousel
+                  <Carousel
                     activeIndex={activeIndex}
                     next={next}
                     previous={previous}
@@ -81,11 +81,11 @@ export default function VehiclePreview(props) {
                       directionText="Next"
                       onClickHandler={next}
                     />
-                  </Carousel> */}
-                  {/* <img
-                                        src={props.vehicle.images[0].url}
-                                        alt={props.vehicle.name}
-                                    /> */}
+                  </Carousel>
+                  <img
+                    src={props.vehicle.images[0].url}
+                    alt={props.vehicle.name}
+                  />
                 </div>
               </Col>
               <Col lg="6" xs="12" className="pr-0">

@@ -1,10 +1,7 @@
 package com.renter.domain;
 
 import com.renter.domain.base.BaseEntity;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -58,7 +55,7 @@ public class VehicleEntity extends BaseEntity {
             joinColumns = @JoinColumn(name = "vehicle_id"),
             inverseJoinColumns = @JoinColumn(name = "addition_id"))
     List<AdditionEntity> additions;
-    @OneToMany(mappedBy = "vehicle")
+    @OneToMany(mappedBy = "vehicle", cascade = CascadeType.ALL)
     private List<ImageEntity> images;
 
 }

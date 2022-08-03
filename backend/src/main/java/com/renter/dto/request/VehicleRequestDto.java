@@ -75,8 +75,8 @@ public class VehicleRequestDto {
     @Schema(implementation = List.class)
     private List<Long> additionIds;
 
-    @NotNull(message = "You need to add at least one image for the vehicle.")
-    @Schema(implementation = MultipartFile.class)
-    private MultipartFile image;
+//    @NotNull(message = "You need to add at least one image for the vehicle.")
+//    @Schema(implementation = MultipartFile.class)
+    private List<MultipartFile> images;
 
 }

@@ -26,7 +26,7 @@ public interface VehicleAPI {
             @ApiResponse(responseCode = "201", description = "New vehicle created",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = VehicleDto.class))})})
-    ResponseEntity<VehicleDto> createVehicle(@RequestPart VehicleRequestDto vehicleRequestDto, @RequestPart MultipartFile image);
+    ResponseEntity<VehicleDto> createVehicle(VehicleRequestDto vehicleRequestDto);
 
     @Operation(summary = "Update vehicle", description = "This endpoint is for updating a specific vehicle object. ", tags = "Vehicle")
     @ApiResponses(value = {

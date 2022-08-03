@@ -16,7 +16,9 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/vehicles")
@@ -28,9 +30,7 @@ public class VehicleController implements VehicleAPI {
     @Override
     @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     @PreAuthorize("hasAuthority('vehicle:write')")
-    public ResponseEntity<VehicleDto> createVehicle(@RequestPart VehicleRequestDto vehicleRequestDto, @RequestPart MultipartFile image) {
-        vehicleRequestDto.setImage(image);
-        System.out.println(image);
+    public ResponseEntity<VehicleDto> createVehicle(@Valid VehicleRequestDto vehicleRequestDto) {
         return new ResponseEntity<>(vehicleService.createVehicle(vehicleRequestDto), HttpStatus.CREATED);
     }
 

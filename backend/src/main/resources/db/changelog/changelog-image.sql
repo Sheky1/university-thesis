@@ -6,7 +6,6 @@
 CREATE TABLE `image` (
   `id` INTEGER NOT NULL AUTO_INCREMENT,
   `url` VARCHAR(255),
-  `price` DOUBLE PRECISION NOT NULL,
   `vehicle_id` INTEGER NOT NULL,
   `created_date` DATE,
   `last_modified_date` DATE,
