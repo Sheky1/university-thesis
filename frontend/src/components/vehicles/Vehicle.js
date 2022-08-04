@@ -58,7 +58,6 @@ class Vehicle extends Component {
   };
 
   render() {
-    console.log(this.props.vehicle);
     return (
       <>
         <DeleteModal
