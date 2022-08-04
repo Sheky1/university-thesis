@@ -64,14 +64,15 @@ public class VehicleServiceImpl implements VehicleService {
             imageEntity.setVehicle(vehicleEntity);
             try {
                 byte[] bytes = multipartFile.getBytes();
-                Path path = Paths.get("/Users/dsejat/Documents/images/" + multipartFile.getOriginalFilename()) ;
+                Path path = Paths.get("/Users/dsejat/Documents/Diplomski/renter-thesis/frontend/src/images/uploaded/" + multipartFile.getOriginalFilename()) ;
                 Files.write(path, bytes);
-                imageEntity.setUrl("/Users/dsejat/Documents/images/" + multipartFile.getOriginalFilename());
+                imageEntity.setUrl(multipartFile.getOriginalFilename());
             } catch (IOException e) {
                 e.printStackTrace();
             }
             return imageEntity;
         }).toList();
+
         VehicleEntity newVehicle = vehicleRepository.save(vehicleEntity);
         vehicleEntity.setImages(images);
         imageRepository.saveAll(images);

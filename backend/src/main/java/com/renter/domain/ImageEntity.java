@@ -1,7 +1,6 @@
 package com.renter.domain;
 
 import com.renter.domain.base.BaseEntity;
-import com.renter.dto.response.base.BaseDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -21,9 +22,9 @@ public class AgencyRequestDto {
     @Schema(example = "Zemunska 2")
     private String address;
 
-    @NotBlank(message = "Logo url is required.")
+    @NotNull(message = "Logo url is required.")
     @Schema(example = "example url")
-    private String logoUrl;
+    private MultipartFile logo;
 
     @NotNull(message = "City id is required.")
     @Schema(example = "1")

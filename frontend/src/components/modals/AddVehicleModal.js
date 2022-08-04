@@ -87,7 +87,7 @@ class AddVehicleModal extends Component {
   fileSelectedHandler = (event) => {
     console.log(event.target.files[0]);
     console.log(event.target.files);
-    this.state.images.push(event.target.files[0]);
+    this.state.images.push(...event.target.files);
     // if (
     //   [...this.state.files].length + [...this.state.old_files].length < 3 &&
     //   this._isMounted
@@ -275,8 +275,6 @@ class AddVehicleModal extends Component {
           // image: formData,
           // images: files,
         };
-        console.log(newVehicle);
-        console.log(formData);
         // formData.append("vehicleRequestDto", newVehicle);
         for (var key in newVehicle) {
           formData.append(key, newVehicle[key]);
@@ -312,8 +310,10 @@ class AddVehicleModal extends Component {
         //   newVehicle,
         //   headers
         // );
-        // this.props.addVehicle(response.data);
-        // this.resetState();
+        setTimeout(() => {
+          this.props.addVehicle(response.data);
+          this.resetState();
+        }, 100);
         console.log(response.data);
       }
       this.props.toggle();
@@ -354,20 +354,6 @@ class AddVehicleModal extends Component {
             Dodavanje vozila
           </ModalHeader>
           <ModalBody>
-            <form
-              method="post"
-              encType="multipart/form-data"
-              action="http://localhost:8080/api/vehicles/image"
-            >
-              <input
-                type="file"
-                name="imageFile"
-                onChange={(e) => {
-                  console.log(e.target.files[0]);
-                }}
-              />
-              <input type="submit" value="Upload" />
-            </form>
             <Form encType="multipart/form-data">
               <FormGroup row>
                 <Label for="name" sm={2}>

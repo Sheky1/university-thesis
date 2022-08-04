@@ -23,7 +23,7 @@ public class AgencyMapper {
         AgencyEntity agencyEntity = new AgencyEntity();
         agencyEntity.setName(agencyRequestDto.getName());
         agencyEntity.setAddress(agencyRequestDto.getAddress());
-        agencyEntity.setLogoUrl(agencyRequestDto.getLogoUrl());
+//        agencyEntity.setLogoUrl(agencyRequestDto.getLogoUrl());
         agencyEntity.setAdditions(new ArrayList<>());
         agencyEntity.setFuelTypes(new ArrayList<>());
         agencyEntity.setVehicleSizes(new ArrayList<>());
@@ -34,7 +34,7 @@ public class AgencyMapper {
     public void updateAgency(AgencyEntity agencyEntity, AgencyRequestDto agencyRequestDto) {
         agencyEntity.setName(agencyRequestDto.getName());
         agencyEntity.setAddress(agencyRequestDto.getAddress());
-        agencyEntity.setLogoUrl(agencyRequestDto.getLogoUrl());
+//        agencyEntity.setLogoUrl(agencyRequestDto.getLogoUrl());
     }
 
     public AgencyDto toDto(AgencyEntity agencyEntity) {

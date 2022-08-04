@@ -18,6 +18,7 @@ import { api_axios } from "../../api/api";
 import { Component } from "react";
 import { fileToBase64, handleErrors } from "../../store/utilities";
 import * as actions from "../../store/actions/index";
+import axios from "axios";
 
 class AddAgencyModal extends Component {
   _isMounted = false;
@@ -57,34 +58,35 @@ class AddAgencyModal extends Component {
   };
 
   fileSelectedHandler = (event) => {
-    if (
-      [...this.state.files].length + [...this.state.old_files].length < 3 &&
-      this._isMounted
-    ) {
-      const files = event.target.files;
+    this.state.images.push(event.target.files[0]);
+    // if (
+    //   [...this.state.files].length + [...this.state.old_files].length < 3 &&
+    //   this._isMounted
+    // ) {
+    //   const files = event.target.files;
 
-      [...files].forEach(async (file, i) => {
-        if (this.fileCheckHandler(file)) {
-          await fileToBase64(file).then((result) => {
-            let image = {
-              src: result,
-              altText: `Image_${i}`,
-              caption: file.name,
-            };
-            !!(
-              [...this.state.files].length + [...this.state.old_files].length <
-              3
-            ) &&
-              this.setState({
-                files: [...this.state.files, result],
-                images: [...this.state.images, image],
-              });
-          });
-        }
-      });
-    } else {
-      event.target.value = "";
-    }
+    //   [...files].forEach(async (file, i) => {
+    //     if (this.fileCheckHandler(file)) {
+    //       await fileToBase64(file).then((result) => {
+    //         let image = {
+    //           src: result,
+    //           altText: `Image_${i}`,
+    //           caption: file.name,
+    //         };
+    //         !!(
+    //           [...this.state.files].length + [...this.state.old_files].length <
+    //           3
+    //         ) &&
+    //           this.setState({
+    //             files: [...this.state.files, result],
+    //             images: [...this.state.images, image],
+    //           });
+    //       });
+    //     }
+    //   });
+    // } else {
+    //   event.target.value = "";
+    // }
   };
 
   fileCheckHandler = (file) => {
@@ -135,7 +137,8 @@ class AddAgencyModal extends Component {
         const city = this.state.cities.find(
           (city) => city.name === this.state.city
         );
-        const { name, address, username, email, password, files } = this.state;
+        const { name, address, username, email, password, files, images } =
+          this.state;
 
         // let newAgency = {
         //     name,
@@ -150,16 +153,37 @@ class AddAgencyModal extends Component {
           name,
           address,
           cityId: city.id,
-          logoUrl: "example",
+          logo: images[0],
           username,
           email,
           password,
         };
         console.log(newAgency);
 
-        const response = await api_axios("post", `/agencies`, newAgency);
-        // console.log(response);
-        this.props.addAgency(response.data);
+        // const response = await api_axios("post", `/agencies`, newAgency);
+
+        const formData = new FormData();
+
+        for (var key in newAgency) {
+          formData.append(key, newAgency[key]);
+        }
+
+        const headers = {
+          "Content-Type":
+            "multipart/form-data; boundary=----WebKitFormBoundaryY4U7hoZMlQAqLCEr",
+          Authorization: `Bearer ${localStorage.token}`,
+          Accept: "application/json",
+          "X-Api-Key": `adb69d232d124c98fe20400d9a4757d71380ba1d4200697e6817c99a30959ed2`,
+        };
+        const response = await axios({
+          method: `post`,
+          url: `http://localhost:8080/api/agencies`,
+          data: formData,
+          headers: headers,
+        });
+        setTimeout(() => {
+          this.props.addAgency(response.data);
+        }, 100);
       }
       this.props.toggle();
     } catch (error) {

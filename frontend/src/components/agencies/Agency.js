@@ -58,6 +58,7 @@ class Agency extends Component {
   }
 
   render() {
+    console.log(this.props.agency);
     return (
       <>
         <DeleteModal
@@ -80,12 +81,14 @@ class Agency extends Component {
                 fontStyle: "italic",
               }}
             >
-              <img
-                src={this.props.agency.logo_url}
-                // src={`data:image/jpeg;base64,${this.props.agency.logo_url}`}
-                alt=""
-                className="reservation-logo"
-              />
+              {require(`../../images/uploaded/${this.props.agency.logoUrl}`) && (
+                <img
+                  src={require(`../../images/uploaded/${this.props.agency.logoUrl}`)}
+                  // src={`data:image/jpeg;base64,${this.props.agency.logo_url}`}
+                  alt=""
+                  className="reservation-logo"
+                />
+              )}
             </CardSubtitle>
             <div className="reservation-text">
               <span className="reservation-left">Naziv agencije:</span>

@@ -17,6 +17,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @Service
@@ -40,17 +44,27 @@ public class AgencyServiceImpl implements AgencyService {
             throw new UniqueValueException("Korisnik sa zadatim korisničkim imenom već postoji.");
         if (userDomainRepository.findByEmail(agencyRequestDto.getEmail()).isPresent())
             throw new UniqueValueException("Korisnik sa zadatim e-mailom već postoji.");
+
         AgencyEntity agencyEntity = agencyMapper.toEntity(agencyRequestDto);
         CityEntity cityEntity = cityRepository.findById(agencyRequestDto.getCityId()).orElseThrow(() -> new NotFoundException("Traženi grad ne postoji."));
         agencyEntity.setCity(cityEntity);
+        try {
+            byte[] bytes = agencyRequestDto.getLogo().getBytes();
+            Path path = Paths.get("/Users/dsejat/Documents/Diplomski/renter-thesis/frontend/src/images/uploaded/" + agencyRequestDto.getLogo().getOriginalFilename()) ;
+            Files.write(path, bytes);
+            agencyEntity.setLogoUrl(agencyRequestDto.getLogo().getOriginalFilename());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         AgencyEntity newAgency = agencyRepository.save(agencyEntity);
         UserDomain user = userMapper.toEntity(agencyRequestDto);
         user.setAgency(newAgency);
         user.setRole(roleRepository.findByName("AGENCY").orElseThrow(() -> new NotFoundException("Tražena uloga ne postoji")));
-        UserDomain newUser = userDomainRepository.save(user);
-        newAgency.setUser(newUser);
-        AgencyEntity agencyToReturn = agencyRepository.save(newAgency);
-        return agencyMapper.toDto(agencyToReturn);
+        userDomainRepository.save(user);
+        newAgency.setUser(user);
+
+        return agencyMapper.toDto(newAgency);
     }
 
     @Override

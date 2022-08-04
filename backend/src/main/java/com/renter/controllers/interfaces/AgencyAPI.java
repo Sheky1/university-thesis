@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @ApiResponses(value = {@ApiResponse(responseCode = "403", description = "You don't have the permission to access this endpoint.", content = @Content), @ApiResponse(responseCode = "400", description = "Bad request", content = @Content)})
@@ -25,7 +26,7 @@ public interface AgencyAPI {
             @ApiResponse(responseCode = "201", description = "New agency created",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = AgencyDto.class))})})
-    ResponseEntity<AgencyDto> createAgency(@RequestBody AgencyRequestDto agencyRequestDto);
+    ResponseEntity<AgencyDto> createAgency(@Valid AgencyRequestDto agencyRequestDto);
 
     @Operation(summary = "Update agency", description = "This endpoint is for updating a specific agency object. ", tags = "Agency")
     @ApiResponses(value = {

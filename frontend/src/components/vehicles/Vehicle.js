@@ -58,6 +58,7 @@ class Vehicle extends Component {
   };
 
   render() {
+    console.log(this.props.vehicle);
     return (
       <>
         <DeleteModal
@@ -75,7 +76,13 @@ class Vehicle extends Component {
         <Col xl="3" lg="4" md="4" sm="6" xs="12">
           <article className="vehicle">
             <div className="img-container">
-              {/* <img src={this.props.vehicle.images[0].url} alt="" /> */}
+              {require(`../../images/uploaded/${this.props.vehicle.images[0].url}`) && (
+                <img
+                  style={{ objectFit: "cover" }}
+                  src={require(`../../images/uploaded/${this.props.vehicle.images[0].url}`)}
+                  alt=""
+                />
+              )}
               <div className="price-top">
                 <h6>
                   {this.props.vehicle.price} {this.props.vehicle.currency.name}

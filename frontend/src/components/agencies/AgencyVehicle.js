@@ -50,12 +50,14 @@ export default class Agency extends Component {
                 fontStyle: "italic",
               }}
             >
-              {/* <img
-                                src={this.props.vehicle.images[0].url}
-                                alt=""
-                                className="reservation-logo"
-                                style={{ width: "250px" }}
-                            /> */}
+              {require(`../../images/uploaded/${this.props.vehicle.images[0].url}`) && (
+                <img
+                  src={require(`../../images/uploaded/${this.props.vehicle.images[0].url}`)}
+                  alt=""
+                  className="reservation-logo"
+                  style={{ width: "250px" }}
+                />
+              )}
             </CardSubtitle>
             <div className="reservation-text">
               <span className="reservation-left">Naziv vozila:</span>

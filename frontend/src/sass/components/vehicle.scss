@@ -1,75 +1,75 @@
 .vehicle {
-    box-shadow: 2px 5px 3px 0px rgba(0, 0, 0, 0.5);
-    transition: all 0.3s linear;
-    margin-bottom: 30px;
+  box-shadow: 2px 5px 3px 0px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s linear;
+  margin-bottom: 30px;
 }
 .vehicle:hover {
-    box-shadow: 4px 10px 5px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 4px 10px 5px 0px rgba(0, 0, 0, 0.5);
 }
 
 .img-container {
-    position: relative;
+  position: relative;
 }
 .img-container img {
-    width: 100%;
-    display: block;
-    transition: all 0.3s linear;
-    min-height: 250px !important;
-    max-height: 250px !important;
-    object-fit: contain;
+  width: 100%;
+  display: block;
+  transition: all 0.3s linear;
+  min-height: 250px !important;
+  max-height: 250px !important;
+  object-fit: contain;
 }
 .price-top {
-    position: absolute;
-    top: 0;
-    left: 0;
-    background: rgba(0, 0, 0, 0.8);
-    color: #fff;
-    padding: 0.3rem 0.6rem 0rem 0.5rem;
-    border-bottom-right-radius: 1rem;
-    font-size: 0.5rem;
-    text-align: center;
-    transition: all 0.3s linear;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 0.3rem 0.6rem 0rem 0.5rem;
+  border-bottom-right-radius: 1rem;
+  font-size: 0.5rem;
+  text-align: center;
+  transition: all 0.3s linear;
 
-    & p {
-        font-size: 0.6rem;
-    }
+  & p {
+    font-size: 0.6rem;
+  }
 }
 .price-top h6 {
-    margin-bottom: 0;
-    font-size: 0.9rem;
-    font-weight: 300;
-    letter-spacing: 1px;
+  margin-bottom: 0;
+  font-size: 0.9rem;
+  font-weight: 300;
+  letter-spacing: 1px;
 }
 
 .vehicle-link {
-    position: absolute;
-    top: 30%;
-    left: 50%;
-    transform: scale(0);
-    transition: all 0.3s linear;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: scale(0);
+  transition: all 0.3s linear;
 }
 .img-container:hover {
-    background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.8);
 }
 .img-container:hover img {
-    opacity: 0.3;
+  opacity: 0.3;
 }
 .img-container:hover .price-top {
-    opacity: 0;
+  opacity: 0;
 }
 .img-container:hover .vehicle-link {
-    transform: translate(-50%, -50%) scale(1);
+  transform: translate(-50%, -50%) scale(1);
 }
 .vehicle-info {
-    background: rgb(161, 161, 161);
-    text-transform: capitalize;
-    padding: 1rem 0;
-    text-align: center;
-    font-weight: 700;
-    letter-spacing: 3px;
-    margin: 0;
+  background: rgb(161, 161, 161);
+  text-transform: capitalize;
+  padding: 1rem 0;
+  text-align: center;
+  font-weight: 700;
+  letter-spacing: 3px;
+  margin: 0;
 }
 
 .empty-search {
-    padding: 3rem;
+  padding: 3rem;
 }

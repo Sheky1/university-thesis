@@ -39,7 +39,10 @@ export default function VehiclePreview(props) {
         onExited={() => setAnimating(false)}
         key={image.url}
       >
-        <img src={image.url} alt={"Vozilo"} />
+        <img
+          src={require(`../../images/uploaded/${image.url}`)}
+          alt={"Vozilo"}
+        />
       </CarouselItem>
     );
   });
@@ -82,10 +85,12 @@ export default function VehiclePreview(props) {
                       onClickHandler={next}
                     />
                   </Carousel>
-                  <img
-                    src={props.vehicle.images[0].url}
-                    alt={props.vehicle.name}
-                  />
+                  {/* {require(`../../images/uploaded/${this.props.vehicle.images[0].url}`) && (
+                    <img
+                      src={require(`../../images/uploaded/${this.props.vehicle.images[0].url}`)}
+                      alt=""
+                    />
+                  )} */}
                 </div>
               </Col>
               <Col lg="6" xs="12" className="pr-0">
