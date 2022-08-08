@@ -1,6 +1,6 @@
 package com.renter.domain;
 
-import com.renter.dto.response.base.BaseDto;
+import com.renter.domain.base.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -14,7 +14,7 @@ import javax.persistence.*;
 @EqualsAndHashCode(callSuper = false)
 @Entity
 @Table(name = "user_domain")
-public class UserDomain extends BaseDto {
+public class UserDomain extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
