@@ -16,4 +16,5 @@
     <include file="classpath:/db/changelog/changelog-user-domain.sql" />
     <include file="classpath:/db/changelog/changelog-role.sql" />
     <include file="classpath:/db/changelog/changelog-image.sql" />
+    <include file="classpath:/db/changelog/changelog-reservation.sql" />
 </databaseChangeLog>
