@@ -34,20 +34,19 @@ class Reseravations extends Component {
 
     getReservations = async (pageNumber) => {
         try {
-            const response = await api_axios(
-                "get",
-                `/reservations?page=${pageNumber}&per_page=${this.state.per_page}`,
-                null
-            );
-            if (this._isMounted) {
-                this.props.getReservations(response.data);
-                const { current_page, total } = response.data.meta;
-                this.setState({
-                    current_page,
-                    total,
-                    loading: false,
-                });
-            }
+            // const response = await api_axios(
+            //     "get",
+            //     `/reservations?page=${pageNumber}&per_page=${this.state.per_page}`,
+            //     null
+            // );
+            const response = await api_axios("get", `/reservations`, null);
+            this.props.getReservations(response.data);
+            // const { current_page, total } = response.data.meta;
+            this.setState({
+                // current_page,
+                // total,
+                loading: false,
+            });
         } catch (error) {
             handleErrors(error);
         }
