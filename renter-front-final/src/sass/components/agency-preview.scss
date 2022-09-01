@@ -1,0 +1,16 @@
+.agency-preview {
+    background-color: white;
+    margin: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    & img {
+        width: 150px;
+    }
+
+    &-name {
+        margin-top: 15px;
+    }
+}

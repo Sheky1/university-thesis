@@ -50,7 +50,7 @@ public class AgencyServiceImpl implements AgencyService {
         agencyEntity.setCity(cityEntity);
         try {
             byte[] bytes = agencyRequestDto.getLogo().getBytes();
-            Path path = Paths.get("/Users/dsejat/Documents/Diplomski/renter-thesis/frontend/src/images/uploaded/" + agencyRequestDto.getLogo().getOriginalFilename()) ;
+            Path path = Paths.get("D:\\Dimitrije\\Posao\\git\\renter-thesis\\frontend\\src\\images\\uploaded\\" + agencyRequestDto.getLogo().getOriginalFilename()) ;
             Files.write(path, bytes);
             agencyEntity.setLogoUrl(agencyRequestDto.getLogo().getOriginalFilename());
         } catch (IOException e) {
