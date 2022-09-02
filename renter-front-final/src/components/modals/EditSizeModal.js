@@ -82,7 +82,7 @@ class AddSizeModal extends Component {
                     updatedSize
                 );
                 toast.success("Uspešno izmenjena veličina.");
-                this.props.updateSize(response.data.data);
+                this.props.updateSize(response.data);
                 this.resetState();
             }
         } catch (error) {

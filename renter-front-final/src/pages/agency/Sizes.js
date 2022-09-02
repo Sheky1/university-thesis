@@ -70,12 +70,12 @@ class Sizes extends Component {
             };
             const response = await params_axios(`/vehicleSizes`, params);
             if (this._isMounted) {
-                this.props.getSizes(response.data.data);
-                const { current_page, total, last_page } = response.data.meta;
+                this.props.getSizes(response.data);
+                // const { current_page, total, last_page } = response.data.meta;
                 this.setState({
-                    current_page,
-                    total,
-                    last_page,
+                    // current_page,
+                    // total,
+                    // last_page,
                     loading: false,
                 });
             }
@@ -107,7 +107,7 @@ class Sizes extends Component {
                     newSize
                 );
                 toast.success("Uspešno dodata veličina.");
-                this.props.addSize(response.data.data);
+                this.props.addSize(response.data);
                 this.toggle();
             }
         } catch (error) {

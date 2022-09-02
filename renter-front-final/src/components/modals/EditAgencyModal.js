@@ -140,7 +140,7 @@ class AddAgencyModal extends Component {
         try {
             const response = await api_axios("get", `/cities`, null);
             if (this._isMounted) {
-                const cities = response.data.data;
+                const cities = response.data;
                 const city = cities[0].name;
                 this.setState({
                     loading: false,
@@ -228,7 +228,7 @@ class AddAgencyModal extends Component {
                     `/agencies/${this.state.agency_id}`,
                     updatedAgency
                 );
-                this.props.updateAgency(response.data.data);
+                this.props.updateAgency(response.data);
                 toast.success("Uspešno izmenjena agencija.");
                 this.resetState();
             }

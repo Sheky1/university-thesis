@@ -87,13 +87,13 @@ class Additions extends Component {
             };
             const response = await params_axios(`/additions`, params);
             if (this._isMounted) {
-                this.props.getAdditions(response.data.data);
-                const { current_page, total, last_page } = response.data.meta;
-                this.setState({
-                    current_page,
-                    total,
-                    last_page,
-                });
+                this.props.getAdditions(response.data);
+                // const { current_page, total, last_page } = response.data.meta;
+                // this.setState({
+                // current_page,
+                // total,
+                // last_page,
+                // });
                 if (this.props.currencies.length === 0) this.getCurrencies();
                 else {
                     this.setState({
@@ -109,9 +109,9 @@ class Additions extends Component {
 
     getCurrencies = async () => {
         try {
-            const response = await api_axios("get", `/app/currencies`, null);
+            const response = await api_axios("get", `/currencies`, null);
             if (this._isMounted) {
-                this.props.getCurrencies(response.data.data);
+                this.props.getCurrencies(response.data);
                 this.setState({
                     currency: this.props.currencies[0].name,
                     loading: false,
@@ -158,7 +158,7 @@ class Additions extends Component {
                     newAddition
                 );
                 toast.success("Uspešno dodat dodatak.");
-                this.props.addAddition(response.data.data);
+                this.props.addAddition(response.data);
                 this.resetState();
             }
         } catch (error) {

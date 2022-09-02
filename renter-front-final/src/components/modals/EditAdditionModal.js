@@ -64,8 +64,8 @@ class EditAdditionModal extends Component {
                 let response;
 
                 if (this.props.currencies.length === 0) {
-                    response = await api_axios("get", `/app/currencies`, null);
-                    this.props.getCurrencies(response.data.data);
+                    response = await api_axios("get", `/currencies`, null);
+                    this.props.getCurrencies(response.data);
                 }
                 // if (this.props.currencies.length !== 0) {
                 //     this.setState({
@@ -126,7 +126,7 @@ class EditAdditionModal extends Component {
                     updatedAddition
                 );
                 toast.success("Uspešno izmenjen dodatak.");
-                this.props.updateAddition(response.data.data);
+                this.props.updateAddition(response.data);
                 this.resetState();
             }
         } catch (error) {

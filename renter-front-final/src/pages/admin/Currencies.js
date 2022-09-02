@@ -75,13 +75,13 @@ class Currencies extends Component {
             };
             const response = await params_axios(`/currencies`, params);
             if (this._isMounted) {
-                const currencies = response.data.data;
-                const { current_page, total, last_page } = response.data.meta;
+                const currencies = response.data;
+                // const { current_page, total, last_page } = response.data.meta;
                 this.setState({
                     currencies,
-                    current_page,
-                    last_page,
-                    total,
+                    // current_page,
+                    // last_page,
+                    // total,
                     loading: false,
                 });
             }
@@ -105,22 +105,33 @@ class Currencies extends Component {
     submitForm = async () => {
         try {
             if (this.checkInputs()) return;
-            if (this._isMounted) {
-                const newCurrency = {
-                    name: this.state.name,
-                };
-                const response = await api_axios(
-                    "post",
-                    `/currencies`,
-                    newCurrency
-                );
-                this.toggle();
-                toast.success("Uspešno dodata valuta.");
-                this.setState({
-                    name: "",
-                    currencies: [response.data.data, ...this.state.currencies],
-                });
-            }
+            const response = await api_axios(
+                "post",
+                `/currencies?name=${this.state.name}`,
+                null
+            );
+            this.toggle();
+            this.setState({
+                name: "",
+                currencies: [...this.state.currencies, response.data],
+            });
+            toast.success("Uspešno dodata valuta.");
+            // if (this._isMounted) {
+            //     const newCurrency = {
+            //         name: this.state.name,
+            //     };
+            //     const response = await api_axios(
+            //         "post",
+            //         `/currencies`,
+            //         newCurrency
+            //     );
+            //     this.toggle();
+            //     toast.success("Uspešno dodata valuta.");
+            //     this.setState({
+            //         name: "",
+            //         currencies: [response.data, ...this.state.currencies],
+            //     });
+            // }
         } catch (error) {
             this.setState({
                 errorText: "Neophodno je da unese naziv za valutu!",

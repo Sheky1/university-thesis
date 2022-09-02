@@ -68,20 +68,28 @@ class EditCityModal extends Component {
         try {
             if (this._isMounted) {
                 if (this.checkInputs()) return;
-
-                let { name } = this.state;
-
-                let updatedCity = {
-                    name,
-                };
-
                 const response = await api_axios(
                     "put",
-                    `/cities/${this.props.city.id}`,
-                    updatedCity
+                    `/cities/${this.props.city.id}?name=${this.state.name}`,
+                    null
                 );
-                this.props.updateCity(response.data.data);
+                this.props.updateCity(response.data);
+
                 toast.success("Uspešno izmenjen grad.");
+
+                // let { name } = this.state;
+
+                // let updatedCity = {
+                //     name,
+                // };
+
+                // const response = await api_axios(
+                //     "put",
+                //     `/cities/${this.props.city.id}`,
+                //     updatedCity
+                // );
+                // this.props.updateCity(response.data);
+                // toast.success("Uspešno izmenjen grad.");
                 this.resetState();
             }
         } catch (error) {

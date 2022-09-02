@@ -50,12 +50,20 @@ export default class AgencyVehicle extends Component {
                                 fontStyle: "italic",
                             }}
                         >
-                            <img
+                            {require(`../../images/uploaded/${this.props.vehicle.images[0].url}`) && (
+                                <img
+                                    src={require(`../../images/uploaded/${this.props.vehicle.images[0].url}`)}
+                                    alt=""
+                                    className="reservation-logo"
+                                    style={{ width: "250px" }}
+                                />
+                            )}
+                            {/* <img
                                 src={this.props.vehicle.images[0].url}
                                 alt=""
                                 className="reservation-logo"
                                 style={{ width: "100%", height: "200px" }}
-                            />
+                            /> */}
                         </CardSubtitle>
                         <div className="reservation-text">
                             <span className="reservation-left">
@@ -70,31 +78,32 @@ export default class AgencyVehicle extends Component {
                                 Vrsta menjača:
                             </span>
                             <span className="reservation-right">
-                                {this.props.vehicle.transmission_type}
+                                {this.props.vehicle.transmissionType}
                             </span>
                         </div>
                         <div className="reservation-text">
                             <span className="reservation-left">Kapacitet:</span>
                             <span className="reservation-right">
-                                {this.props.vehicle.passenger_count}
+                                {this.props.vehicle.passengerCount}
                             </span>
                         </div>
                         <div className="reservation-text">
                             <span className="reservation-left">Tablice:</span>
                             <span className="reservation-right">
-                                {this.props.vehicle.register_number}
+                                {this.props.vehicle.registerNumber}
                             </span>
                         </div>
                         <div className="reservation-text">
                             <span className="reservation-left">Veličina:</span>
                             <span className="reservation-right">
-                                {this.props.vehicle.vehicle_size.name}
+                                {this.props.vehicle.vehicleSize.name}
                             </span>
                         </div>
                         <div className="reservation-text">
                             <span className="reservation-left">Cena:</span>
                             <span className="reservation-right">
-                                {this.props.vehicle.price} {this.props.vehicle.currency.name}
+                                {this.props.vehicle.price}{" "}
+                                {this.props.vehicle.currency.name}
                             </span>
                         </div>
                     </Card>

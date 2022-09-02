@@ -149,7 +149,7 @@ class Reports extends Component {
                 params
             );
             if (this._isMounted) {
-                this.props.getReports(response.data.data);
+                this.props.getReports(response.data);
                 console.log(this.props.reports);
                 this.setState({
                     loading: false,
@@ -165,8 +165,8 @@ class Reports extends Component {
         try {
             const response = await api_axios("get", `/vehicles`, null);
             if (this._isMounted) {
-                this.props.getVehicles(response.data.data);
-                console.log(response.data.data);
+                this.props.getVehicles(response.data);
+                console.log(response.data);
                 // if (this.props.vehicles.length !== 0) {
                 //     this.setState({
                 //         name: this.props.vehicles[0].name,

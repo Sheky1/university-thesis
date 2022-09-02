@@ -47,12 +47,12 @@ class MainAgencija extends Component {
                 //     `/vehicles?page=${pageNumber}&per_page=${this.state.per_page}`,
                 //     null
                 // );
-                this.props.getVehicles(response.data.data);
-                const { current_page, total, last_page } = response.data.meta;
+                this.props.getVehicles(response.data);
+                // const { current_page, total, last_page } = response.data.meta;
                 this.setState({
-                    current_page,
-                    total,
-                    last_page,
+                    // current_page,
+                    // total,
+                    // last_page,
                     loading: false,
                 });
             }

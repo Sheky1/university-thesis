@@ -104,11 +104,18 @@ class Vehicle extends Component {
                     <article className="vehicle">
                         <div className="img-container">
                             {this.props.vehicle.images[0] !== undefined ? (
-                                <img
-                                    src={this.props.vehicle.images[0].url}
-                                    alt=""
-                                />
+                                require(`../../images/uploaded/${this.props.vehicle.images[0].url}`) && (
+                                    <img
+                                        style={{ objectFit: "cover" }}
+                                        src={require(`../../images/uploaded/${this.props.vehicle.images[0].url}`)}
+                                        alt=""
+                                    />
+                                )
                             ) : (
+                                // <img
+                                //     src={this.props.vehicle.images[0].url}
+                                //     alt=""
+                                // />
                                 <> </>
                             )}
 

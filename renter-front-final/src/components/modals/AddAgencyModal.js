@@ -20,6 +20,7 @@ import { fileToBase64, handleErrors } from "../../store/utilities";
 import * as actions from "../../store/actions/index";
 import ErrorModal from "./ErrorModal";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 class AddAgencyModal extends Component {
     _isMounted = false;
@@ -71,53 +72,54 @@ class AddAgencyModal extends Component {
     };
 
     fileSelectedHandler = (event) => {
-        this.setState({
-            images: [],
-            old_images: [],
-            files: [],
-            old_files: [],
-        });
+        // this.setState({
+        //     images: [],
+        //     old_images: [],
+        //     files: [],
+        //     old_files: [],
+        // });
+        this.state.images.push(event.target.files[0]);
         // if (
         //     [...this.state.files].length + [...this.state.old_files].length <
         //         3 &&
         //     this._isMounted
         // ) {
-        if (event.target.files.length === 1) {
-            const files = event.target.files;
+        // if (event.target.files.length === 1) {
+        //     const files = event.target.files;
 
-            [...files].forEach(async (file, i) => {
-                if (this.fileCheckHandler(file)) {
-                    await fileToBase64(file).then((result) => {
-                        let image = {
-                            src: result,
-                            altText: `Image_${i}`,
-                            caption: file.name,
-                        };
-                        !!(
-                            [...this.state.files].length +
-                                [...this.state.old_files].length <
-                            3
-                        ) &&
-                            this.setState({
-                                files: [...this.state.files, result],
-                                images: [...this.state.images, image],
-                            });
-                    });
-                } else {
-                    event.target.value = null;
-                    this.setState({
-                        errorText: "Morate uneti korektan format slike.",
-                    });
-                    this.toggleError();
-                }
-            });
-        } else {
-            event.target.value = null;
-            this.setState({
-                errorText: "Neophodno je uneti samo jednu sliku.",
-            });
-            this.toggleError();
-        }
+        //     [...files].forEach(async (file, i) => {
+        //         if (this.fileCheckHandler(file)) {
+        //             await fileToBase64(file).then((result) => {
+        //                 let image = {
+        //                     src: result,
+        //                     altText: `Image_${i}`,
+        //                     caption: file.name,
+        //                 };
+        //                 !!(
+        //                     [...this.state.files].length +
+        //                         [...this.state.old_files].length <
+        //                     3
+        //                 ) &&
+        //                     this.setState({
+        //                         files: [...this.state.files, result],
+        //                         images: [...this.state.images, image],
+        //                     });
+        //             });
+        //         } else {
+        //             event.target.value = null;
+        //             this.setState({
+        //                 errorText: "Morate uneti korektan format slike.",
+        //             });
+        //             this.toggleError();
+        //         }
+        //     });
+        // } else {
+        //     event.target.value = null;
+        //     this.setState({
+        //         errorText: "Neophodno je uneti samo jednu sliku.",
+        //     });
+        //     this.toggleError();
+        // }
     };
 
     fileCheckHandler = (file) => {
@@ -143,7 +145,7 @@ class AddAgencyModal extends Component {
         try {
             const response = await api_axios("get", `/cities`, null);
             if (this._isMounted) {
-                const cities = response.data.data;
+                const cities = response.data;
                 const city = cities[0].name;
                 this.setState({
                     loading: false,
@@ -241,28 +243,61 @@ class AddAgencyModal extends Component {
                     email,
                     password,
                     files,
+                    images,
                 } = this.state;
 
                 let newAgency = {
                     name,
                     address,
-                    city_id: city.id,
-                    images: files,
+                    cityId: city.id,
+                    logo: images[0],
                     username,
                     email,
                     password,
                 };
+                // let newAgency = {
+                //     name,
+                //     address,
+                //     city_id: city.id,
+                //     images: files,
+                //     username,
+                //     email,
+                //     password,
+                // };
                 console.log(newAgency);
 
-                const response = await api_axios(
-                    "post",
-                    `/agencies`,
-                    newAgency
-                );
-                // console.log(response);
-                this.props.addAgency(response.data.data);
-                toast.success("Uspešno dodata nova agencija.");
-                this.resetState();
+                const formData = new FormData();
+
+                for (var key in newAgency) {
+                    formData.append(key, newAgency[key]);
+                }
+
+                // const response = await api_axios(
+                //     "post",
+                //     `/agencies`,
+                //     newAgency
+                // );
+                // // console.log(response);
+                // this.props.addAgency(response.data);
+
+                const headers = {
+                    "Content-Type":
+                        "multipart/form-data; boundary=----WebKitFormBoundaryY4U7hoZMlQAqLCEr",
+                    Authorization: `Bearer ${localStorage.token}`,
+                    Accept: "application/json",
+                    "X-Api-Key": `adb69d232d124c98fe20400d9a4757d71380ba1d4200697e6817c99a30959ed2`,
+                };
+                const response = await axios({
+                    method: `post`,
+                    url: `http://localhost:8080/api/agencies`,
+                    data: formData,
+                    headers: headers,
+                });
+                setTimeout(() => {
+                    this.props.addAgency(response.data);
+                    toast.success("Uspešno dodata nova agencija.");
+                    this.resetState();
+                }, 100);
             }
         } catch (error) {
             console.log(error.response.status);

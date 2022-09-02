@@ -68,21 +68,29 @@ class EditCurrencyModal extends Component {
         try {
             if (this._isMounted) {
                 if (this.checkInputs()) return;
-
-                let { name } = this.state;
-
-                let updatedCurrency = {
-                    name,
-                };
-
                 const response = await api_axios(
                     "put",
-                    `/currencies/${this.props.currency.id}`,
-                    updatedCurrency
+                    `/cities/${this.props.currency.id}?name=${this.state.name}`,
+                    null
                 );
-                this.props.updateCurrency(response.data.data);
+                this.props.updateCurrency(response.data);
+
                 toast.success("Uspešno izmenjena valuta.");
-                this.resetState();
+
+                // let { name } = this.state;
+
+                // let updatedCurrency = {
+                //     name,
+                // };
+
+                // const response = await api_axios(
+                //     "put",
+                //     `/currencies/${this.props.currency.id}`,
+                //     updatedCurrency
+                // );
+                // this.props.updateCurrency(response.data);
+                // toast.success("Uspešno izmenjena valuta.");
+                // this.resetState();
             }
         } catch (error) {
             this.setState({

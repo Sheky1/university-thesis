@@ -130,7 +130,7 @@ class Reports extends Component {
                 params
             );
             if (this._isMounted) {
-                this.props.getReports(response.data.data);
+                this.props.getReports(response.data);
                 console.log(this.props.reports);
                 this.setState({
                     loading: false,
@@ -146,7 +146,7 @@ class Reports extends Component {
         try {
             const response = await api_axios("get", `/agencies`, null);
             if (this._isMounted) {
-                this.props.getAgencies(response.data.data);
+                this.props.getAgencies(response.data);
 
                 this.setState({
                     loading: false,

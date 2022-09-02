@@ -75,13 +75,13 @@ class Cities extends Component {
             };
             const response = await params_axios(`/cities`, params);
             if (this._isMounted) {
-                const cities = response.data.data;
-                const { current_page, total, last_page } = response.data.meta;
+                const cities = response.data;
+                // const { current_page, total, last_page } = response.data.meta;
                 this.setState({
                     cities,
-                    current_page,
-                    total,
-                    last_page,
+                    // current_page,
+                    // total,
+                    // last_page,
                     loading: false,
                 });
             }
@@ -106,16 +106,27 @@ class Cities extends Component {
         try {
             if (this._isMounted) {
                 if (this.checkInputs()) return;
-                const newCity = {
-                    name: this.state.name,
-                };
-                const response = await api_axios("post", `/cities`, newCity);
+                const response = await api_axios(
+                    "post",
+                    `/cities?name=${this.state.name}`,
+                    null
+                );
                 this.toggle();
-                toast.success("Uspešno dodat grad.");
                 this.setState({
                     name: "",
-                    cities: [response.data.data, ...this.state.cities],
+                    cities: [...this.state.cities, response.data],
                 });
+                toast.success("Uspešno dodat grad.");
+                // const newCity = {
+                //     name: this.state.name,
+                // };
+                // const response = await api_axios("post", `/cities`, newCity);
+                // this.toggle();
+                // toast.success("Uspešno dodat grad.");
+                // this.setState({
+                //     name: "",
+                //     cities: [response.data, ...this.state.cities],
+                // });
             }
         } catch (error) {
             this.setState({

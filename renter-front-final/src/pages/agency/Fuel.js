@@ -75,12 +75,12 @@ class Fuel extends Component {
             };
             const response = await params_axios(`/fuelTypes`, params);
             if (this._isMounted) {
-                this.props.getFuelTypes(response.data.data);
-                const { current_page, total, last_page } = response.data.meta;
+                this.props.getFuelTypes(response.data);
+                // const { current_page, total, last_page } = response.data.meta;
                 this.setState({
-                    current_page,
-                    total,
-                    last_page,
+                    // current_page,
+                    // total,
+                    // last_page,
                     loading: false,
                 });
             }
@@ -114,7 +114,7 @@ class Fuel extends Component {
                     newFuelType
                 );
                 toast.success("Uspešno dodata vrsta goriva.");
-                this.props.addFuelType(response.data.data);
+                this.props.addFuelType(response.data);
                 this.toggle();
             }
         } catch (error) {

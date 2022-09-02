@@ -50,7 +50,7 @@ export default function Reservation({ reservation, updateReservation, flag }) {
                 `/reservations/approve/${reservation.id}?sort_direction=desc`,
                 null
             );
-            updateReservation(response.data.data);
+            updateReservation(response.data);
         } catch (error) {
             handleErrors(error);
         }
@@ -93,7 +93,7 @@ export default function Reservation({ reservation, updateReservation, flag }) {
                 `/reservations/complete/${reservation.id}?sort_direction=desc`,
                 null
             );
-            updateReservation(response.data.data);
+            updateReservation(response.data);
         } catch (error) {
             handleErrors(error);
         }

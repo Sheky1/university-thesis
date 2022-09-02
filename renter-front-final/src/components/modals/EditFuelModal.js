@@ -82,7 +82,7 @@ class EditFuelModal extends Component {
                     updatedFuelType
                 );
                 toast.success("Uspešno izmenjena vrsta goriva.");
-                this.props.updateFuelType(response.data.data);
+                this.props.updateFuelType(response.data);
                 this.resetState();
             }
         } catch (error) {

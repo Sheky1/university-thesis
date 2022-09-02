@@ -45,12 +45,12 @@ class MainAdmin extends Component {
             //     null
             // );
             if (this._isMounted) {
-                this.props.getAgencies(response.data.data);
-                const { current_page, total, last_page } = response.data.meta;
+                this.props.getAgencies(response.data);
+                // const { current_page, total, last_page } = response.data.meta;
                 this.setState({
-                    current_page,
-                    total,
-                    last_page,
+                    // current_page,
+                    // total,
+                    // last_page,
                     loading: false,
                 });
             }

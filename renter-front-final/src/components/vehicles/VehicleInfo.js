@@ -43,7 +43,11 @@ export default function VehiclePreview(props) {
                 onExited={() => setAnimating(false)}
                 key={image.url}
             >
-                <img src={image.url} alt={"Vozilo"} />
+                <img
+                    src={require(`../../images/uploaded/${image.url}`)}
+                    alt={"Vozilo"}
+                />
+                {/* <img src={image.url} alt={"Vozilo"} /> */}
             </CarouselItem>
         );
     });
@@ -57,7 +61,7 @@ export default function VehiclePreview(props) {
                             <h2>{props.vehicle.name}</h2>
                             <h5>
                                 {props.vehicle.transmission_type} |{" "}
-                                {props.vehicle.vehicle_size.name}
+                                {props.vehicle.vehicleSize.name}
                             </h5>
                         </div>
                         <div className="vehicle-preview-container">
