@@ -2,7 +2,6 @@
 
 -- changeset jlong:create_table_reservations
 -- preconditions onFail:MARK_RAN onError:MARK_RAN
--- precondition-sql-check expectedResult:0 select count(*) from information_schema.tables where table_name = 'reservations';
 CREATE TABLE `reservations` (
   `id` INTEGER NOT NULL AUTO_INCREMENT,
   `phone_number` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
