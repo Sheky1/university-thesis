@@ -429,18 +429,17 @@ const SingleVehicle = () => {
 				Accept: "application/json",
 				"X-Api-Key": `adb69d232d124c98fe20400d9a4757d71380ba1d4200697e6817c99a30959ed2`,
 			};
-			const params = {
-				vehicle_id: state.vehicle.id,
-			};
-			// const response = await axios.get(
-			// 	"http://localhost:8080/api/reservations/vehicleReservations",
-			// 	{
-			// 		params,
-			// 		headers,
-			// 	}
-			// );
-			// const reservations = response.data;
-			// dispatch(actions.getReservations(reservations));
+			const pathParts = location.pathname.split("/");
+			const response = await axios.get(
+				`http://localhost:8080/api/reservations/vehicle/${
+					pathParts[pathParts.length - 1]
+				}`,
+				{
+					headers,
+				}
+			);
+			const reservations = response.data;
+			dispatch(actions.getReservations(reservations));
 			setState({
 				...state,
 				loading: false,

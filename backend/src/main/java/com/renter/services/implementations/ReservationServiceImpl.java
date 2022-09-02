@@ -91,9 +91,11 @@ public class ReservationServiceImpl implements ReservationService {
         List<ReservationEntity> reservations = reservationRepository.findAll();
         List<ReservationEntity> toReturn = new ArrayList<>();
         for (ReservationEntity reservationEntity : reservations) {
-            if (isApproved && reservationEntity.getApproved()) toReturn.add(reservationEntity);
+            if (isApproved && reservationEntity.getApproved() && !reservationEntity.getCompleted()) toReturn.add(reservationEntity);
             else if (isCompleted && reservationEntity.getCompleted()) toReturn.add(reservationEntity);
             else if (isRejected && reservationEntity.getRejected()) toReturn.add(reservationEntity);
+            else if (!isApproved && !isCompleted && !isRejected &&
+                    !reservationEntity.getApproved() && !reservationEntity.getCompleted() && !reservationEntity.getRejected()) toReturn.add(reservationEntity);
         }
         return toReturn.stream().map(resevationMapper::toDto).toList();
     }
@@ -101,5 +103,23 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     public ReservationDto getReservationById(Long id) {
         return resevationMapper.toDto(reservationRepository.findById(id).orElseThrow(() -> new NotFoundException("Tražena rezervacija ne postoji.")));
+    }
+
+    @Override
+    public List<ReservationDto> getAgencyReservations(Long id) {
+        if(agencyRepository.findById(id).isEmpty()) throw new NotFoundException("Tražena agencija ne postoji.");
+        return reservationRepository.findReservationEntitiesByAgency_Id(id).stream().map(resevationMapper::toDto).toList();
+    }
+
+    @Override
+    public List<ReservationDto> getVehicleReservations(Long id) {
+        if(vehicleRepository.findById(id).isEmpty()) throw new NotFoundException("Traženo vozilo ne postoji.");
+        return reservationRepository.findReservationEntitiesByVehicle_Id(id).stream().map(resevationMapper::toDto).toList();
+    }
+
+    @Override
+    public List<ReservationDto> getAgencyReservationsByUser(Long id) {
+        UserDomain user = userDomainRepository.findById(id).orElseThrow(() -> new NotFoundException("Traženi korisnik ne postoji."));
+        return reservationRepository.findReservationEntitiesByAgency_Id(user.getAgency().getId()).stream().map(resevationMapper::toDto).toList();
     }
 }

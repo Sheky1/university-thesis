@@ -18,5 +18,8 @@ public interface ReservationService {
     List<ReservationDto> getAllReservations();
     List<ReservationDto> filterReservations(boolean isApproved, boolean isCompleted, boolean isRejected);
     ReservationDto getReservationById(Long id);
+    List<ReservationDto> getAgencyReservations(Long id);
+    List<ReservationDto> getVehicleReservations(Long id);
+    List<ReservationDto> getAgencyReservationsByUser(Long id);
 
 }

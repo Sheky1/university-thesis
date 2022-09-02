@@ -550,6 +550,10 @@ const SingleAgency = (props) => {
 		});
 	}, [agencies]);
 
+	useEffect(() => {
+		getReservations();
+	}, [vehicles]);
+
 	const toggle = () => setModal(!state.modal);
 	const toggleEdit = () => setModalEdit(!state.modalEdit);
 	const toggleCollapse = () => setCollapse(!state.collapse);
@@ -668,11 +672,8 @@ const SingleAgency = (props) => {
 			//   }
 			// );
 			const response = await axios.get(
-				`http://localhost:8080/api/agencies/reservations`,
+				`http://localhost:8080/api/reservations/agency/${state.agency.id}`,
 				{
-					params: {
-						agency_id: id,
-					},
 					headers,
 				}
 			);
@@ -707,7 +708,6 @@ const SingleAgency = (props) => {
 				agency,
 			});
 			getVehicles(agency.id, agencies);
-			// getReservations(agency.id);
 		} catch (error) {
 			console.log(error);
 			handleErrors(error);

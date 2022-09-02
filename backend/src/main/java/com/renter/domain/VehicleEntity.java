@@ -57,5 +57,7 @@ public class VehicleEntity extends BaseEntity {
     List<AdditionEntity> additions;
     @OneToMany(mappedBy = "vehicle", cascade = CascadeType.ALL)
     private List<ImageEntity> images;
+    @OneToMany(mappedBy = "vehicle", cascade = CascadeType.ALL)
+    private List<ReservationEntity> reservations;
 
 }

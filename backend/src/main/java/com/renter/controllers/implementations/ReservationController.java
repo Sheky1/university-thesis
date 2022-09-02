@@ -62,7 +62,7 @@ public class ReservationController implements ReservationAPI {
 
     @Override
     @GetMapping("/filter")
-    public List<ReservationDto> filterReservations(@RequestParam boolean isApproved, @RequestParam boolean isCompleted, @RequestParam boolean isRejected) {
+    public List<ReservationDto> filterReservations(@RequestParam(defaultValue = "false") boolean isApproved, @RequestParam(defaultValue = "false") boolean isCompleted, @RequestParam(defaultValue = "false") boolean isRejected) {
         return reservationService.filterReservations(isApproved, isCompleted, isRejected);
     }
 
@@ -71,5 +71,23 @@ public class ReservationController implements ReservationAPI {
     @GetMapping("{id}")
     public ReservationDto getReservationById(@PathVariable Long id) {
         return reservationService.getReservationById(id);
+    }
+
+    @Override
+    @GetMapping("/agency/{id}")
+    public List<ReservationDto> getAgencyReservations(@PathVariable Long id) {
+        return reservationService.getAgencyReservations(id);
+    }
+
+    @Override
+    @GetMapping("/vehicle/{id}")
+    public List<ReservationDto> getVehicleReservations(@PathVariable Long id) {
+        return reservationService.getVehicleReservations(id);
+    }
+
+    @Override
+    @GetMapping("/user/{id}")
+    public List<ReservationDto> getAgencyReservationsByUser(Long id) {
+        return reservationService.getAgencyReservationsByUser(id);
     }
 }

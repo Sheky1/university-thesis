@@ -83,4 +83,31 @@ public interface ReservationAPI {
             @ApiResponse(responseCode = "404", description = "Reservation with given id not found",
                     content = @Content)})
     ReservationDto getReservationById(@PathVariable Long id);
+
+    @Operation(summary = "Get Reservation", description = "This endpoint is for getting reservations objects for a certain agency. ", tags = "Reservation")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Reservation successfully found",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ReservationDto.class))}),
+            @ApiResponse(responseCode = "404", description = "Reservation with given id not found",
+                    content = @Content)})
+    List<ReservationDto> getAgencyReservations(@PathVariable Long id);
+
+    @Operation(summary = "Get Reservation", description = "This endpoint is for getting reservations objects for a certain vehicle.", tags = "Reservation")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Reservation successfully found",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ReservationDto.class))}),
+            @ApiResponse(responseCode = "404", description = "Reservation with given id not found",
+                    content = @Content)})
+    List<ReservationDto> getVehicleReservations(@PathVariable Long id);
+
+    @Operation(summary = "Get Reservation", description = "This endpoint is for getting reservations objects for a certain agency.", tags = "Reservation")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Reservation successfully found",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ReservationDto.class))}),
+            @ApiResponse(responseCode = "404", description = "Reservation with given id not found",
+                    content = @Content)})
+    List<ReservationDto> getAgencyReservationsByUser(@PathVariable Long id);
 }
