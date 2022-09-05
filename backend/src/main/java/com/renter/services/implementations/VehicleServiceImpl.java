@@ -1,6 +1,8 @@
 package com.renter.services.implementations;
 
 import com.renter.domain.*;
+import com.renter.dto.request.DateFilterDto;
+import com.renter.dto.request.ReservationRequestDto;
 import com.renter.dto.request.VehicleRequestDto;
 import com.renter.dto.response.VehicleDto;
 import com.renter.exceptions.NotFoundException;
@@ -16,6 +18,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -64,7 +67,7 @@ public class VehicleServiceImpl implements VehicleService {
             imageEntity.setVehicle(vehicleEntity);
             try {
                 byte[] bytes = multipartFile.getBytes();
-                Path path = Paths.get("D:\\Dimitrije\\Posao\\git\\renter-thesis\\renter-front-final\\src\\images\\uploaded\\" + multipartFile.getOriginalFilename()) ;
+                Path path = Paths.get("D:\\Dimitrije\\Posao\\git\\renter-thesis\\renter-front-final\\src\\images\\uploaded\\" + multipartFile.getOriginalFilename());
                 Files.write(path, bytes);
                 imageEntity.setUrl(multipartFile.getOriginalFilename());
             } catch (IOException e) {
@@ -130,5 +133,29 @@ public class VehicleServiceImpl implements VehicleService {
     @Override
     public VehicleDto getVehicleById(Long id) {
         return vehicleMapper.toDto(vehicleRepository.findById(id).orElseThrow(() -> new NotFoundException("Traženo vozilo ne postoji.")));
+    }
+
+    @Override
+    public List<VehicleDto> filterVehiclesByDate(DateFilterDto dateFilterDto) {
+        List<VehicleEntity> allVehicles = vehicleRepository.findAll();
+        List<VehicleEntity> toReturn = new ArrayList<>();
+        for (VehicleEntity vehicleEntity : allVehicles) {
+            int flag = 0;
+            for (ReservationEntity reservation : vehicleEntity.getReservations()) {
+                if (datesIntersecting(reservation, dateFilterDto)) {
+                    flag = 1;
+                    break;
+                }
+            }
+            if(flag == 0) toReturn.add(vehicleEntity);
+        }
+        return toReturn.stream().map(vehicleMapper::toDto).toList();
+    }
+
+    private boolean datesIntersecting(ReservationEntity reservation, DateFilterDto dateFilterDto) {
+        return reservation.getTakingDate().isBefore(dateFilterDto.getTakingDate()) && reservation.getReturningDate().isAfter(dateFilterDto.getTakingDate()) ||
+                reservation.getTakingDate().isBefore(dateFilterDto.getReturningDate()) && reservation.getReturningDate().isAfter(dateFilterDto.getReturningDate()) ||
+                reservation.getTakingDate().isBefore(dateFilterDto.getTakingDate()) && reservation.getReturningDate().isAfter(dateFilterDto.getReturningDate()) ||
+                reservation.getTakingDate().isAfter(dateFilterDto.getTakingDate()) && reservation.getReturningDate().isBefore(dateFilterDto.getReturningDate());
     }
 }

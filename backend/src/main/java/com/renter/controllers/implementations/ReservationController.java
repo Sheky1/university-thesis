@@ -90,4 +90,5 @@ public class ReservationController implements ReservationAPI {
     public List<ReservationDto> getAgencyReservationsByUser(Long id) {
         return reservationService.getAgencyReservationsByUser(id);
     }
+
 }

@@ -1,6 +1,8 @@
 package com.renter.controllers.interfaces;
 
+import com.renter.dto.request.DateFilterDto;
 import com.renter.dto.request.VehicleRequestDto;
+import com.renter.dto.response.ReservationDto;
 import com.renter.dto.response.VehicleDto;
 import com.renter.utility.VehicleFields;
 import io.swagger.v3.oas.annotations.Operation;
@@ -67,4 +69,11 @@ public interface VehicleAPI {
             @ApiResponse(responseCode = "404", description = "Vehicle with given id not found",
                     content = @Content)})
     VehicleDto getVehicleById(@PathVariable Long id);
+
+    @Operation(summary = "Get vehicles by reservation date", description = "This endpoint is for getting vehicles by reservation date. ", tags = "Vehicle")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Vehicles successfully found",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = VehicleDto.class))})})
+    List<VehicleDto> filterVehiclesByDate(@RequestBody DateFilterDto dateFilterDto);
 }

@@ -1,7 +1,9 @@
 package com.renter.controllers.implementations;
 
 import com.renter.controllers.interfaces.VehicleAPI;
+import com.renter.dto.request.DateFilterDto;
 import com.renter.dto.request.VehicleRequestDto;
+import com.renter.dto.response.ReservationDto;
 import com.renter.dto.response.VehicleDto;
 import com.renter.services.interfaces.VehicleService;
 import com.renter.utility.VehicleFields;
@@ -67,4 +69,11 @@ public class VehicleController implements VehicleAPI {
     public VehicleDto getVehicleById(@PathVariable Long id) {
         return vehicleService.getVehicleById(id);
     }
+
+    @Override
+    @GetMapping("/filter-by-date")
+    public List<VehicleDto> filterVehiclesByDate(@RequestBody DateFilterDto dateFilterDto) {
+        return vehicleService.filterVehiclesByDate(dateFilterDto);
+    }
+
 }

@@ -6,6 +6,7 @@ import com.renter.domain.UserDomain;
 import com.renter.domain.VehicleEntity;
 import com.renter.dto.request.ReservationRequestDto;
 import com.renter.dto.response.ReservationDto;
+import com.renter.exceptions.ConflictException;
 import com.renter.exceptions.NotFoundException;
 import com.renter.mappers.ResevationMapper;
 import com.renter.repositories.AgencyRepository;
@@ -41,6 +42,10 @@ public class ReservationServiceImpl implements ReservationService {
         UserDomain userDomain = userDomainRepository
                 .findById(reservationRequestDto.getUserId())
                 .orElseThrow(() -> new NotFoundException("Traženi korisnik ne postoji."));
+
+        for(ReservationEntity reservation: vehicleEntity.getReservations()) {
+            if(datesIntersecting(reservation, reservationRequestDto)) throw new ConflictException("Vec postoji rezervazija za dato vozilo u datom periodu.");
+        }
 
         ReservationEntity reservationEntity = resevationMapper.toEntity(reservationRequestDto);
         reservationEntity.setVehicle(vehicleEntity);
@@ -121,5 +126,12 @@ public class ReservationServiceImpl implements ReservationService {
     public List<ReservationDto> getAgencyReservationsByUser(Long id) {
         UserDomain user = userDomainRepository.findById(id).orElseThrow(() -> new NotFoundException("Traženi korisnik ne postoji."));
         return reservationRepository.findReservationEntitiesByAgency_Id(user.getAgency().getId()).stream().map(resevationMapper::toDto).toList();
+    }
+
+    private boolean datesIntersecting(ReservationEntity reservation, ReservationRequestDto reservationRequestDto) {
+        return reservation.getTakingDate().isBefore(reservationRequestDto.getTakingDate()) && reservation.getReturningDate().isAfter(reservationRequestDto.getTakingDate()) ||
+                reservation.getTakingDate().isBefore(reservationRequestDto.getReturningDate()) && reservation.getReturningDate().isAfter(reservationRequestDto.getReturningDate()) ||
+                reservation.getTakingDate().isBefore(reservationRequestDto.getTakingDate()) && reservation.getReturningDate().isAfter(reservationRequestDto.getReturningDate()) ||
+                reservation.getTakingDate().isAfter(reservationRequestDto.getTakingDate()) && reservation.getReturningDate().isBefore(reservationRequestDto.getReturningDate());
     }
 }
