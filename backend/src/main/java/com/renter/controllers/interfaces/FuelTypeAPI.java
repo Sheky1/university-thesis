@@ -19,7 +19,7 @@ import java.util.List;
 @ApiResponses(value = {@ApiResponse(responseCode = "403", description = "You don't have the permission to access this endpoint.", content = @Content), @ApiResponse(responseCode = "400", description = "Bad request", content = @Content)})
 public interface FuelTypeAPI {
 
-    @Operation(summary = "Create fuel type", description = "This endpoint is for creating a new fuel type object. ", tags = "Fuel type")
+    @Operation(summary = "Create fuel type", description = "This endpoint is for creating a new fuel type object. ", tags = "Fuel types")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "New fuel type created",
                     content = {@Content(mediaType = "application/json",
@@ -29,7 +29,7 @@ public interface FuelTypeAPI {
                             schema = @Schema(implementation = FuelTypeDto.class))})})
     ResponseEntity<FuelTypeDto> createFuelType(FuelSizeRequestDto fuelTypeRequestDto);
 
-    @Operation(summary = "Update fuel type", description = "This endpoint is for updating a specific fuel type object. ", tags = "Fuel type")
+    @Operation(summary = "Update fuel type", description = "This endpoint is for updating a specific fuel type object. ", tags = "Fuel types")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Fuel type successfully updated",
                     content = {@Content(mediaType = "application/json",
@@ -41,26 +41,26 @@ public interface FuelTypeAPI {
                             schema = @Schema(implementation = FuelTypeDto.class))})})
     FuelTypeDto updateFuelType(@PathVariable Long id, @RequestBody FuelSizeRequestDto fuelTypeRequestDto);
 
-    @Operation(summary = "Delete fuel type", description = "This endpoint is for deleting a fuel type object. ", tags = "Fuel type")
+    @Operation(summary = "Delete fuel type", description = "This endpoint is for deleting a fuel type object. ", tags = "Fuel types")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Fuel type deleted successfully",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema())})})
     void deleteFuelType(Long id);
 
-    @Operation(summary = "Get fuel types", description = "This endpoint is for getting all available fuel types with pagination.", tags = "Fuel type")
+    @Operation(summary = "Get fuel types", description = "This endpoint is for getting all available fuel types with pagination.", tags = "Fuel types")
     @ApiResponse(responseCode = "200", description = "All fuel types found",
             content = {@Content(mediaType = "application/json",
                     schema = @Schema(implementation = FuelTypeDto.class))})
     List<FuelTypeDto> getAllFuelTypes(@RequestParam(defaultValue = "${pagination.page}") int page, @RequestParam(defaultValue = "${pagination.size}") int size, @RequestParam(defaultValue = "${sorting.field}") SimpleFields field, @RequestParam(defaultValue = "${sorting.direction}") Sort.Direction direction);
 
-    @Operation(summary = "Get fuel types", description = "This endpoint is for getting all available fuel types.", tags = "Fuel type")
+    @Operation(summary = "Get fuel types", description = "This endpoint is for getting all available fuel types.", tags = "Fuel types")
     @ApiResponse(responseCode = "200", description = "All fuel types found",
             content = {@Content(mediaType = "application/json",
                     schema = @Schema(implementation = FuelTypeDto.class))})
     List<FuelTypeDto> getAllFuelTypes();
 
-    @Operation(summary = "Get fuel type", description = "This endpoint is for getting specific fuel type object. ", tags = "Fuel type")
+    @Operation(summary = "Get fuel type", description = "This endpoint is for getting specific fuel type object. ", tags = "Fuel types")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Fuel type successfully found",
                     content = {@Content(mediaType = "application/json",

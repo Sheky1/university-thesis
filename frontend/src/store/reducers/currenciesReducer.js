@@ -8,13 +8,13 @@ const currenciesReducer = (state = initialState, action) => {
             return action.payload;
         case actionTypes.UPDATE_CURRENCY:
             return [
+                action.payload,
                 ...state.filter(
                     (currency) => currency.id !== action.payload.id
                 ),
-                action.payload,
             ];
         case actionTypes.ADD_CURRENCY:
-            return [...state, action.payload];
+            return [action.payload, ...state];
         case actionTypes.DELETE_CURRENCY:
             return [
                 ...state.filter((currency) => currency.id !== action.payload),

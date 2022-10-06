@@ -12,7 +12,7 @@ export default function AgencyVehicles({ vehicles }) {
     }
 
     return (
-        <Container fluid className="p-5">
+        <Container fluid className="p-4">
             <Row>
                 {vehicles.map((vehicle) => {
                     return <AgencyVehicle key={vehicle.id} vehicle={vehicle} />;

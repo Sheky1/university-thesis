@@ -14,7 +14,7 @@ export default function AdditionList({ additions, deleteItem }) {
                                 color: "whitesmoke",
                             }}
                         >
-                            <span>Moguci dodaci:</span>
+                            <span>Mogući dodaci:</span>
                         </ListGroupItem>
                         {additions.map((addition) => {
                             return (

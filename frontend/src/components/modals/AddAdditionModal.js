@@ -35,7 +35,7 @@ const AddAdditionModal = (props) => {
                 </ModalHeader>
                 <ModalBody>
                     <Form>
-                        <FormGroup row>
+                        <FormGroup row style={{ width: "100%" }}>
                             <Label for="name" sm={4}>
                                 Naziv dodatka
                             </Label>
@@ -44,6 +44,7 @@ const AddAdditionModal = (props) => {
                                     type="text"
                                     name="name"
                                     id="name"
+                                    placeholder="Klima"
                                     value={props.name}
                                     onChange={(e) => {
                                         props.handleChange(e);
@@ -51,7 +52,7 @@ const AddAdditionModal = (props) => {
                                 />
                             </Col>
                         </FormGroup>
-                        <FormGroup row>
+                        <FormGroup row style={{ width: "100%" }}>
                             <Label for="price" sm={4}>
                                 Cena
                             </Label>
@@ -60,6 +61,7 @@ const AddAdditionModal = (props) => {
                                     type="number"
                                     name="price"
                                     id="price"
+                                    placeholder="100"
                                     value={props.price}
                                     onChange={(e) => {
                                         props.handleChange(e);
@@ -67,7 +69,7 @@ const AddAdditionModal = (props) => {
                                 />
                             </Col>
                         </FormGroup>
-                        <FormGroup row>
+                        <FormGroup row style={{ width: "100%" }}>
                             <Label for="currency" sm={4}>
                                 Valuta
                             </Label>

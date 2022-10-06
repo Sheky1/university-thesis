@@ -20,7 +20,7 @@ import java.util.List;
 @ApiResponses(value = {@ApiResponse(responseCode = "403", description = "You don't have the permission to access this endpoint.", content = @Content), @ApiResponse(responseCode = "400", description = "Bad request", content = @Content)})
 public interface ReservationAPI {
 
-    @Operation(summary = "Create Reservation", description = "This endpoint is for creating a new Reservation object. ", tags = "Reservation")
+    @Operation(summary = "Create Reservation", description = "This endpoint is for creating a new Reservation object. ", tags = "Reservations")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "New Reservation created",
                     content = {@Content(mediaType = "application/json",
@@ -30,7 +30,7 @@ public interface ReservationAPI {
                             schema = @Schema(implementation = ReservationDto.class))})})
     ResponseEntity<ReservationDto> createReservation(@RequestBody ReservationRequestDto ReservationRequestDto);
 
-    @Operation(summary = "Approve Reservation", description = "This endpoint is for approving a specific Reservation object. ", tags = "Reservation")
+    @Operation(summary = "Approve Reservation", description = "This endpoint is for approving a specific Reservation object. ", tags = "Reservations")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Reservation successfully updated",
                     content = {@Content(mediaType = "application/json",
@@ -39,7 +39,7 @@ public interface ReservationAPI {
                     content = @Content)})
     ReservationDto approveReservation(@PathVariable Long id);
 
-    @Operation(summary = "Complete Reservation", description = "This endpoint is for completing a specific Reservation object. ", tags = "Reservation")
+    @Operation(summary = "Complete Reservation", description = "This endpoint is for completing a specific Reservation object. ", tags = "Reservations")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Reservation successfully updated",
                     content = {@Content(mediaType = "application/json",
@@ -48,7 +48,7 @@ public interface ReservationAPI {
                     content = @Content)})
     ReservationDto completeReservation(@PathVariable Long id);
 
-    @Operation(summary = "Reject Reservation", description = "This endpoint is for rejecting a specific Reservation object. ", tags = "Reservation")
+    @Operation(summary = "Reject Reservation", description = "This endpoint is for rejecting a specific Reservation object. ", tags = "Reservations")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Reservation successfully updated",
                     content = {@Content(mediaType = "application/json",
@@ -57,25 +57,25 @@ public interface ReservationAPI {
                     content = @Content)})
     ReservationDto rejectReservation(@PathVariable Long id);
 
-    @Operation(summary = "Get Reservations", description = "This endpoint is for getting all available Reservations with pagination.", tags = "Reservation")
+    @Operation(summary = "Get Reservations", description = "This endpoint is for getting all available Reservations with pagination.", tags = "Reservations")
     @ApiResponse(responseCode = "200", description = "All Reservations found",
             content = {@Content(mediaType = "application/json",
                     schema = @Schema(implementation = ReservationDto.class))})
     List<ReservationDto> getAllReservations(@RequestParam(defaultValue = "${pagination.page}") int page, @RequestParam(defaultValue = "${pagination.size}") int size, @RequestParam(defaultValue = "${sorting.field}") ReservationFields field, @RequestParam(defaultValue = "${sorting.direction}") Sort.Direction direction);
 
-    @Operation(summary = "Get Reservations", description = "This endpoint is for getting all available Reservations.", tags = "Reservation")
+    @Operation(summary = "Get Reservations", description = "This endpoint is for getting all available Reservations.", tags = "Reservations")
     @ApiResponse(responseCode = "200", description = "All Reservations found",
             content = {@Content(mediaType = "application/json",
                     schema = @Schema(implementation = ReservationDto.class))})
     List<ReservationDto> getAllReservations();
 
-    @Operation(summary = "Filter Reservations", description = "This endpoint is for filter all available Reservations.", tags = "Reservation")
+    @Operation(summary = "Filter Reservations", description = "This endpoint is for filter all available Reservations.", tags = "Reservations")
     @ApiResponse(responseCode = "200", description = "All Reservations found",
             content = {@Content(mediaType = "application/json",
                     schema = @Schema(implementation = ReservationDto.class))})
     List<ReservationDto> filterReservations(@RequestParam boolean isApproved, @RequestParam boolean isCompleted, @RequestParam boolean isRejected);
 
-    @Operation(summary = "Get Reservation", description = "This endpoint is for getting specific Reservation object. ", tags = "Reservation")
+    @Operation(summary = "Get Reservation", description = "This endpoint is for getting specific Reservation object. ", tags = "Reservations")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Reservation successfully found",
                     content = {@Content(mediaType = "application/json",
@@ -84,7 +84,7 @@ public interface ReservationAPI {
                     content = @Content)})
     ReservationDto getReservationById(@PathVariable Long id);
 
-    @Operation(summary = "Get Reservation", description = "This endpoint is for getting reservations objects for a certain agency. ", tags = "Reservation")
+    @Operation(summary = "Get Reservation", description = "This endpoint is for getting reservations objects for a certain agency. ", tags = "Reservations")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Reservation successfully found",
                     content = {@Content(mediaType = "application/json",
@@ -93,7 +93,7 @@ public interface ReservationAPI {
                     content = @Content)})
     List<ReservationDto> getAgencyReservations(@PathVariable Long id);
 
-    @Operation(summary = "Get Reservation", description = "This endpoint is for getting reservations objects for a certain vehicle.", tags = "Reservation")
+    @Operation(summary = "Get Reservation", description = "This endpoint is for getting reservations objects for a certain vehicle.", tags = "Reservations")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Reservation successfully found",
                     content = {@Content(mediaType = "application/json",
@@ -102,7 +102,7 @@ public interface ReservationAPI {
                     content = @Content)})
     List<ReservationDto> getVehicleReservations(@PathVariable Long id);
 
-    @Operation(summary = "Get Reservation", description = "This endpoint is for getting reservations objects for a certain agency.", tags = "Reservation")
+    @Operation(summary = "Get Reservation", description = "This endpoint is for getting reservations objects for a certain agency.", tags = "Reservations")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Reservation successfully found",
                     content = {@Content(mediaType = "application/json",

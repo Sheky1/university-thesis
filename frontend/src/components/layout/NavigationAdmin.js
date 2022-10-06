@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-import logo from "../../images/logo.png";
+import logo from "../../images/renter_full_color.png";
+import { Button } from "reactstrap";
 import { Link } from "react-router-dom";
 import {
-    // FaChartBar,
     FaPlus,
-    // FaQuestionCircle,
-    // FaHandsHelping,
     FaHeadset,
     FaCity,
     FaChartLine,
@@ -13,15 +11,21 @@ import {
 } from "react-icons/fa";
 import AddAgencyModal from "../modals/AddAgencyModal";
 
-export default function NavigationAdmin() {
+export default function NavigationAdmin(props) {
     const [modal, setModal] = useState(false);
 
     const toggle = () => setModal(!modal);
+
+    const classForButton = window.location.pathname;
+
     return (
         <>
             <AddAgencyModal modal={modal} toggle={toggle} />
             <div className="navbar">
                 <nav className="navbar__nav">
+                    <Button onClick={props.toggle} className="close">
+                        x
+                    </Button>
                     <div className="navbar-logo">
                         <Link to="/home-admin/">
                             <img src={logo} alt="logo" />
@@ -29,7 +33,14 @@ export default function NavigationAdmin() {
                     </div>
                     <ul className="navbar__list">
                         <li className="navbar__item">
-                            <Link to="/home-admin/" className="navbar__link">
+                            <Link
+                                to="/home-admin/"
+                                className={
+                                    classForButton === "/home-admin/"
+                                        ? "navbar__link navbar__link__active"
+                                        : "navbar__link"
+                                }
+                            >
                                 <span>
                                     <FaHeadset />
                                 </span>
@@ -48,7 +59,11 @@ export default function NavigationAdmin() {
                         <li className="navbar__item">
                             <Link
                                 to="/home-admin/cities/"
-                                className="navbar__link"
+                                className={
+                                    classForButton === "/home-admin/cities/"
+                                        ? "navbar__link navbar__link__active"
+                                        : "navbar__link"
+                                }
                             >
                                 <span>
                                     <FaCity />
@@ -59,7 +74,11 @@ export default function NavigationAdmin() {
                         <li className="navbar__item">
                             <Link
                                 to="/home-admin/currencies/"
-                                className="navbar__link"
+                                className={
+                                    classForButton === "/home-admin/currencies/"
+                                        ? "navbar__link navbar__link__active"
+                                        : "navbar__link"
+                                }
                             >
                                 <span>
                                     <FaDollarSign />
@@ -71,39 +90,25 @@ export default function NavigationAdmin() {
                         <li className="navbar__item">
                             <Link
                                 to="/home-admin/reports/"
-                                className="navbar__link"
+                                className={
+                                    classForButton === "/home-admin/reports/"
+                                        ? "navbar__link navbar__link__active"
+                                        : "navbar__link"
+                                }
+                                onClick={
+                                    classForButton === "/home-admin/reports/"
+                                        ? () => {
+                                              window.location.reload();
+                                          }
+                                        : () => {}
+                                }
                             >
                                 <span>
                                     <FaChartLine />
                                 </span>
-                                Izvestaji
+                                Izveštaji
                             </Link>
                         </li>
-                        {/* <li className="navbar__item">
-                            <button className="navbar__link">
-                                <span>
-                                    <FaChartBar />
-                                </span>
-                                Statistika
-                            </button>
-                        </li>
-                        <hr />
-                        <li className="navbar__item">
-                            <button className="navbar__link">
-                                <span>
-                                    <FaQuestionCircle />
-                                </span>
-                                Help
-                            </button>
-                        </li>
-                        <li className="navbar__item">
-                            <button className="navbar__link">
-                                <span>
-                                    <FaHandsHelping />
-                                </span>
-                                Podrska
-                            </button>
-                        </li> */}
                     </ul>
                 </nav>
             </div>

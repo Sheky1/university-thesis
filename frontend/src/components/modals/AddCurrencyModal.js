@@ -45,15 +45,16 @@ class AddCityModal extends Component {
                     </ModalHeader>
                     <ModalBody>
                         <Form>
-                            <FormGroup row>
-                                <Label for="name" sm={4}>
+                            <FormGroup row style={{ width: "100%" }}>
+                                <Label for="name" xs={4}>
                                     Naziv valute
                                 </Label>
-                                <Col sm={8}>
+                                <Col xs={8}>
                                     <Input
                                         type="text"
                                         name="name"
                                         id="name"
+                                        placeholder="EUR"
                                         onChange={(e) => {
                                             this.props.handleChange(e);
                                         }}

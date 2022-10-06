@@ -12,7 +12,7 @@ const vehicleReducer = (state = initialState, action) => {
                 ...state.filter((vehicle) => vehicle.id !== action.payload.id),
             ];
         case actionTypes.ADD_VEHICLE:
-            return [...state, action.payload];
+            return [action.payload, ...state];
         case actionTypes.DELETE_VEHICLE:
             return [
                 ...state.filter((vehicle) => vehicle.id !== action.payload),

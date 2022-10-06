@@ -12,7 +12,7 @@ const agencyReducer = (state = initialState, action) => {
                 ...state.filter((agency) => agency.id !== action.payload.id),
             ];
         case actionTypes.ADD_AGENCY:
-            return [...state, action.payload];
+            return [action.payload, ...state];
         case actionTypes.DELETE_AGENCY:
             return [...state.filter((agency) => agency.id !== action.payload)];
         default:

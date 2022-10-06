@@ -11,15 +11,15 @@ import reservationsReducer from "./reservationsReducer";
 import reportsReducer from "./reportsReducer";
 
 const rootReducer = combineReducers({
-  user: loginReducer,
-  agencies: agencyReducer,
-  vehicles: vehicleReducer,
-  vehicleSizes: vehicleSizesReducer,
-  fuelTypes: fuelTypesReducer,
-  currencies: currenciesReducer,
-  additions: additionsReducer,
-  reservations: reservationsReducer,
-  reports: reportsReducer,
+    user: loginReducer,
+    agencies: agencyReducer,
+    vehicles: vehicleReducer,
+    vehicleSizes: vehicleSizesReducer,
+    fuelTypes: fuelTypesReducer,
+    currencies: currenciesReducer,
+    additions: additionsReducer,
+    reservations: reservationsReducer,
+    reports: reportsReducer,
 });
 
 export default rootReducer;

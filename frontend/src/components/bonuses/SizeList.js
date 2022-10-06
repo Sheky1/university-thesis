@@ -19,7 +19,7 @@ export default function SizeList({ sizes, deleteItem }) {
                                 color: "whitesmoke",
                             }}
                         >
-                            <span>Velicine:</span>
+                            <span>Veličine:</span>
                         </ListGroupItem>
                         {sizes.map((size) => {
                             return (

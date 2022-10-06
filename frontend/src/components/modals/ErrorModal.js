@@ -12,7 +12,7 @@ const ErrorModal = (props) => {
                 scrollable={true}
                 size="lg"
             >
-                <ModalHeader toggle={() => props.toggle()}>Greska </ModalHeader>
+                <ModalHeader toggle={() => props.toggle()}>Greška </ModalHeader>
                 <ModalBody style={{ textAlign: "center" }}>
                     <span
                         style={{

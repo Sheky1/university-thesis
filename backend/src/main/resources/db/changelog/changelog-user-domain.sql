@@ -2,7 +2,7 @@
 
 -- changeset jlong:create_table_user_domain
 -- preconditions onFail:MARK_RAN onError:MARK_RAN
--- precondition-sql-check expectedResult:1 select count(*) from information_schema.tables where table_name = 'user_domain';
+-- precondition-sql-check expectedResult:0 select count(*) from information_schema.tables where table_name = 'user_domain';
 CREATE TABLE `user_domain` (
   `id` INTEGER NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(255) NOT NULL,

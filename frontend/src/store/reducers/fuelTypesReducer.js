@@ -8,13 +8,13 @@ const fuelTypesReducer = (state = initialState, action) => {
             return action.payload;
         case actionTypes.UPDATE_FUEL_TYPE:
             return [
+                action.payload,
                 ...state.filter(
                     (fuelType) => fuelType.id !== action.payload.id
                 ),
-                action.payload,
             ];
         case actionTypes.ADD_FUEL_TYPE:
-            return [...state, action.payload];
+            return [action.payload, ...state];
         case actionTypes.DELETE_FUEL_TYPE:
             return [
                 ...state.filter((fuelType) => fuelType.id !== action.payload),

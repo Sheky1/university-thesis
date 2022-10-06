@@ -43,7 +43,7 @@ class AddCityModal extends Component {
                     </ModalHeader>
                     <ModalBody>
                         <Form>
-                            <FormGroup row>
+                            <FormGroup row style={{ width: "100%" }}>
                                 <Label for="name" sm={4}>
                                     Naziv grada
                                 </Label>
@@ -52,6 +52,7 @@ class AddCityModal extends Component {
                                         type="text"
                                         name="name"
                                         id="name"
+                                        placeholder="Beograd"
                                         onChange={(e) => {
                                             this.props.handleChange(e);
                                         }}

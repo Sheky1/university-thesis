@@ -54,7 +54,7 @@ class AddFuelModal extends Component {
                     </ModalHeader>
                     <ModalBody>
                         <Form>
-                            <FormGroup row>
+                            <FormGroup row style={{ width: "100%" }}>
                                 <Label for="name" sm={4}>
                                     Naziv goriva
                                 </Label>
@@ -63,6 +63,7 @@ class AddFuelModal extends Component {
                                         type="text"
                                         name="name"
                                         id="name"
+                                        placeholder="Benzin"
                                         onChange={(e) => {
                                             this.props.handleChange(e);
                                         }}

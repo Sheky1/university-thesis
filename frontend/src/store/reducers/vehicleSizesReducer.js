@@ -8,11 +8,11 @@ const vehicleSizesReducer = (state = initialState, action) => {
             return action.payload;
         case actionTypes.UPDATE_SIZE:
             return [
-                ...state.filter((size) => size.id !== action.payload.id),
                 action.payload,
+                ...state.filter((size) => size.id !== action.payload.id),
             ];
         case actionTypes.ADD_SIZE:
-            return [...state, action.payload];
+            return [action.payload, ...state];
         case actionTypes.DELETE_SIZE:
             return [...state.filter((size) => size.id !== action.payload)];
         default:

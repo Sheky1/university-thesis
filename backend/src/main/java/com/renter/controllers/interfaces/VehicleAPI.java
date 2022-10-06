@@ -23,14 +23,14 @@ import java.util.List;
 @ApiResponses(value = {@ApiResponse(responseCode = "403", description = "You don't have the permission to access this endpoint.", content = @Content), @ApiResponse(responseCode = "400", description = "Bad request", content = @Content)})
 public interface VehicleAPI {
 
-    @Operation(summary = "Create vehicle", description = "This endpoint is for creating a new vehicle object. ", tags = "Vehicle")
+    @Operation(summary = "Create vehicle", description = "This endpoint is for creating a new vehicle object. ", tags = "Vehicles")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "New vehicle created",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = VehicleDto.class))})})
     ResponseEntity<VehicleDto> createVehicle(VehicleRequestDto vehicleRequestDto);
 
-    @Operation(summary = "Update vehicle", description = "This endpoint is for updating a specific vehicle object. ", tags = "Vehicle")
+    @Operation(summary = "Update vehicle", description = "This endpoint is for updating a specific vehicle object. ", tags = "Vehicles")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Vehicle successfully updated",
                     content = {@Content(mediaType = "application/json",
@@ -42,26 +42,26 @@ public interface VehicleAPI {
                             schema = @Schema(implementation = VehicleDto.class))})})
     VehicleDto updateVehicle(@PathVariable Long id, @RequestBody VehicleRequestDto vehicleRequestDto);
 
-    @Operation(summary = "Delete vehicle", description = "This endpoint is for deleting a vehicle object. ", tags = "Vehicle")
+    @Operation(summary = "Delete vehicle", description = "This endpoint is for deleting a vehicle object. ", tags = "Vehicles")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Vehicle deleted successfully",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema())})})
     void deleteVehicle(Long id);
 
-    @Operation(summary = "Get vehicles", description = "This endpoint is for getting all available vehicles with pagination.", tags = "Vehicle")
+    @Operation(summary = "Get vehicles", description = "This endpoint is for getting all available vehicles with pagination.", tags = "Vehicles")
     @ApiResponse(responseCode = "200", description = "All vehicles found",
             content = {@Content(mediaType = "application/json",
                     schema = @Schema(implementation = VehicleDto.class))})
     List<VehicleDto> getAllVehicles(@RequestParam(defaultValue = "${pagination.page}") int page, @RequestParam(defaultValue = "${pagination.size}") int size, @RequestParam(defaultValue = "${sorting.field}") VehicleFields field, @RequestParam(defaultValue = "${sorting.direction}") Sort.Direction direction);
 
-    @Operation(summary = "Get vehicles", description = "This endpoint is for getting all available vehicles.", tags = "Vehicle")
+    @Operation(summary = "Get vehicles", description = "This endpoint is for getting all available vehicles.", tags = "Vehicles")
     @ApiResponse(responseCode = "200", description = "All vehicles found",
             content = {@Content(mediaType = "application/json",
                     schema = @Schema(implementation = VehicleDto.class))})
     List<VehicleDto> getAllVehicles();
 
-    @Operation(summary = "Get vehicle", description = "This endpoint is for getting specific vehicle object. ", tags = "Vehicle")
+    @Operation(summary = "Get vehicle", description = "This endpoint is for getting specific vehicle object. ", tags = "Vehicles")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Vehicle successfully found",
                     content = {@Content(mediaType = "application/json",
@@ -70,7 +70,7 @@ public interface VehicleAPI {
                     content = @Content)})
     VehicleDto getVehicleById(@PathVariable Long id);
 
-    @Operation(summary = "Get vehicles by reservation date", description = "This endpoint is for getting vehicles by reservation date. ", tags = "Vehicle")
+    @Operation(summary = "Get vehicles by reservation date", description = "This endpoint is for getting vehicles by reservation date. ", tags = "Vehicles")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Vehicles successfully found",
                     content = {@Content(mediaType = "application/json",

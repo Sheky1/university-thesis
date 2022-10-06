@@ -1,134 +1,197 @@
 .btn {
-  &-primary {
-    margin-top: 15px;
-    background-color: $color-primary-light;
-    outline: none;
-    color: white;
+	&-primary {
+		margin-top: 15px;
+		background-color: $color-primary-light;
+		outline: none;
+		color: white;
+		&,
+		&:link,
+		&:visited {
+			text-decoration: none;
+			padding: 1rem 7rem;
+			display: inline-block;
+			border-radius: 5px;
+			transition: all 0.2s;
+			position: relative;
+			font-size: $default-font-size;
 
-    &,
-    &:link,
-    &:visited {
-      text-decoration: none;
-      padding: 1rem 7rem;
-      display: inline-block;
-      border-radius: 5px;
-      transition: all 0.2s;
-      position: relative;
-      font-size: $default-font-size;
+			// for the <button> element
+			border: none;
+			cursor: pointer;
+		}
 
-      // for the <button> element
-      border: none;
-      cursor: pointer;
-    }
+		&:hover {
+			transform: translateY(-0.3rem);
+			box-shadow: 0 1rem 2rem rgba($color-black, 0.2);
+			color: white;
 
-    &:hover {
-      transform: translateY(-0.3rem);
-      box-shadow: 0 1rem 2rem rgba($color-black, 0.2);
-      color: white;
+			&::after {
+				transform: scaleX(1.4) scaleY(1.6);
+				opacity: 0;
+			}
+		}
 
-      &::after {
-        transform: scaleX(1.4) scaleY(1.6);
-        opacity: 0;
-      }
-    }
+		&:active,
+		&:focus {
+			outline: none;
+			transform: translateY(-0.1rem);
+			box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
+		}
 
-    &:active,
-    &:focus {
-      outline: none;
-      transform: translateY(-0.1rem);
-      box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
-    }
+		&::after {
+			content: "";
+			display: inline-block;
+			height: 100%;
+			width: 100%;
+			border-radius: 5px;
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: -1;
+			transition: all 0.5s;
+		}
 
-    &::after {
-      content: "";
-      display: inline-block;
-      height: 100%;
-      width: 100%;
-      border-radius: 5px;
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: -1;
-      transition: all 0.5s;
-    }
+		&--animated {
+			animation: moveInBottom 1s;
+			animation-delay: 0.5s;
+			animation-fill-mode: backwards;
+		}
 
-    &--animated {
-      animation: moveInBottom 1s;
-      animation-delay: 0.5s;
-      animation-fill-mode: backwards;
-    }
+		&--white {
+			background: $color-white;
+			color: $color-grey-dark;
 
-    &--white {
-      background: $color-white;
-      color: $color-grey-dark;
+			&::after {
+				background: $color-white;
+			}
+		}
 
-      &::after {
-        background: $color-white;
-      }
-    }
+		&--green {
+			background: $color-primary;
+			color: $color-white;
 
-    &--green {
-      background: $color-primary;
-      color: $color-white;
+			&::after {
+				background: $color-primary;
+			}
+		}
+	}
 
-      &::after {
-        background: $color-primary;
-      }
-    }
-  }
+	&-features {
+		display: inline-block;
+		text-decoration: none;
+		letter-spacing: 3px;
+		color: whitesmoke;
+		background: $color-primary-light;
+		padding: 0.4rem 0.9rem;
+		border: 3px solid $color-primary-light;
+		transition: all 0.3s linear;
+		text-transform: uppercase;
+		cursor: pointer;
 
-  &-features {
-    display: inline-block;
-    text-decoration: none;
-    letter-spacing: 3px;
-    color: whitesmoke;
-    background: $color-primary-light;
-    padding: 0.4rem 0.9rem;
-    border: 3px solid $color-primary-light;
-    transition: all 0.3s linear;
-    text-transform: uppercase;
-    cursor: pointer;
+		&:hover {
+			background: transparent;
+			color: $color-primary-light;
+		}
+	}
 
-    &:hover {
-      background: transparent;
-      color: $color-primary-light;
-    }
-  }
+	&-small {
+		padding: 0.3rem 2rem;
+	}
 
-  &-small {
-    padding: 0.3rem 2rem;
-    color: white;
-  }
+	&-vehicles {
+		padding: 0.2rem 1.2rem;
+		margin-top: 15px;
+		margin-right: 10px;
+	}
 
-  &-vehicles {
-    padding: 0.2rem 1.2rem;
-    margin-top: 15px;
-    margin-right: 10px;
-    color: white;
-  }
+	&-red {
+		background-color: rgb(207, 73, 73);
+	}
 
-  &-red {
-    background-color: rgb(207, 73, 73);
-  }
+	&-green {
+		background-color: #16b841;
+	}
 
-  &-green {
-    background-color: #16b841;
-  }
+	&-hidden {
+		display: none;
 
-  &-hidden {
-    display: none;
-
-    @media only screen and (max-width: 768px) {
-      display: block;
-    }
-  }
+		@media only screen and (max-width: 768px) {
+			display: block;
+		}
+	}
 }
 
 .vehicle-link {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: scale(0);
-  transition: all 0.3s linear;
-  transform: translate(-50%, -50%) scale(1);
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: scale(0);
+	transition: all 0.3s linear;
+	transform: translate(-50%, -50%) scale(1);
+}
+
+.close {
+	background: none;
+	border: 0;
+	box-sizing: border-box;
+	color: #333;
+	cursor: pointer;
+	font-family: "Josefin Sans", sans-serif;
+	font-size: 18px;
+	letter-spacing: 1.5px;
+	outline: none;
+	overflow: hidden;
+	padding: 10px 0 0;
+	position: absolute;
+	text-transform: uppercase;
+	top: 30px;
+	right: 10px;
+	transform: translate(-50%, -50%);
+	transition: all 0.2s ease-in;
+	width: 10px;
+	z-index: 10;
+	display: none;
+
+	@media only screen and (max-width: 768px) {
+		display: block;
+	}
+
+	&::before,
+	&::after {
+		background-color: transparent;
+		content: "";
+		display: block;
+		height: 1px;
+		left: 0;
+		position: absolute;
+		transform-origin: center left;
+		transition: all 0.2s ease-in;
+		width: 141.4214px;
+		z-index: -1;
+		display: none;
+
+		@media only screen and (max-width: 768px) {
+			display: block;
+		}
+	}
+
+	&::before {
+		top: 0;
+		transform: rotate(45deg);
+	}
+
+	&::after {
+		bottom: 0;
+		transform: rotate(-45deg);
+	}
+
+	&:hover {
+		color: $color-primary;
+	}
+
+	&:hover::before,
+	&:hover::after {
+		height: 50px;
+		transform: rotate(0deg);
+	}
 }

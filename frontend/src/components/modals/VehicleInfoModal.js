@@ -27,12 +27,23 @@ class VehicleInfoModal extends Component {
                         Rezervacije za dato vozilo
                     </ModalHeader>
                     <ModalBody>
-                        <Form>
-                            <ReservationList
-                                reservations={this.props.reservations}
-                                updateReservation={this.props.updateReservation}
-                            />
-                        </Form>
+                        {this.props.reservations.length === 0 ? (
+                            <>
+                                <p>
+                                    Trenutno ne postoji nijedna rezervacija
+                                    vezana za ovo vozilo.
+                                </p>
+                            </>
+                        ) : (
+                            <Form>
+                                <ReservationList
+                                    reservations={this.props.reservations}
+                                    updateReservation={
+                                        this.props.updateReservation
+                                    }
+                                />
+                            </Form>
+                        )}
                     </ModalBody>
                     <ModalFooter className="modal-footer">
                         <Button

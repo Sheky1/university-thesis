@@ -17,7 +17,7 @@ import java.util.List;
 @ApiResponses(value = {@ApiResponse(responseCode = "403", description = "You don't have the permission to access this endpoint.", content = @Content), @ApiResponse(responseCode = "400", description = "Bad request", content = @Content)})
 public interface CityAPI {
 
-    @Operation(summary = "Create city", description = "This endpoint is for creating a new city object. ", tags = "City")
+    @Operation(summary = "Create city", description = "This endpoint is for creating a new city object. ", tags = "Cities")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "New city created",
                     content = {@Content(mediaType = "application/json",
@@ -27,7 +27,7 @@ public interface CityAPI {
                             schema = @Schema(implementation = CityDto.class))})})
     ResponseEntity<CityDto> createCity(String name);
 
-    @Operation(summary = "Update city", description = "This endpoint is for updating a specific city object. ", tags = "City")
+    @Operation(summary = "Update city", description = "This endpoint is for updating a specific city object. ", tags = "Cities")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "City successfully updated",
                     content = {@Content(mediaType = "application/json",
@@ -39,26 +39,26 @@ public interface CityAPI {
                             schema = @Schema(implementation = CityDto.class))})})
     CityDto updateCity(@PathVariable Long id, @RequestParam String name);
 
-    @Operation(summary = "Delete city", description = "This endpoint is for deleting a city object. ", tags = "City")
+    @Operation(summary = "Delete city", description = "This endpoint is for deleting a city object. ", tags = "Cities")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "City deleted successfully",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema())})})
     void deleteCity(Long id);
 
-    @Operation(summary = "Get cities", description = "This endpoint is for getting all available cities with pagination.", tags = "City")
+    @Operation(summary = "Get cities", description = "This endpoint is for getting all available cities with pagination.", tags = "Cities")
     @ApiResponse(responseCode = "200", description = "All cities found",
             content = {@Content(mediaType = "application/json",
                     schema = @Schema(implementation = CityDto.class))})
     List<CityDto> getAllCities(@RequestParam(defaultValue = "${pagination.page}") int page, @RequestParam(defaultValue = "${pagination.size}") int size, @RequestParam(defaultValue = "${sorting.field}") SimpleFields field, @RequestParam(defaultValue = "${sorting.direction}") Sort.Direction direction);
 
-    @Operation(summary = "Get cities", description = "This endpoint is for getting all available cities.", tags = "City")
+    @Operation(summary = "Get cities", description = "This endpoint is for getting all available cities.", tags = "Cities")
     @ApiResponse(responseCode = "200", description = "All cities found",
             content = {@Content(mediaType = "application/json",
                     schema = @Schema(implementation = CityDto.class))})
     List<CityDto> getAllCities();
 
-    @Operation(summary = "Get city", description = "This endpoint is for getting specific city object. ", tags = "City")
+    @Operation(summary = "Get city", description = "This endpoint is for getting specific city object. ", tags = "Cities")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "City successfully found",
                     content = {@Content(mediaType = "application/json",

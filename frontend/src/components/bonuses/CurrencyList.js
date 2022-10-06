@@ -3,7 +3,11 @@ import { Row, Container, ListGroup, ListGroupItem } from "react-bootstrap";
 import Currency from "./Currency";
 import Loading from "../layout/Loading";
 
-export default function CurrencyList({ currencies, deleteItem }) {
+export default function CurrencyList({
+    currencies,
+    deleteItem,
+    updateCurrency,
+}) {
     if (currencies.length === 0) {
         return <Loading />;
     }
@@ -18,7 +22,7 @@ export default function CurrencyList({ currencies, deleteItem }) {
                                 color: "whitesmoke",
                             }}
                         >
-                            <span>Trenutno ponudjene valute:</span>
+                            <span>Trenutno ponuđene valute:</span>
                         </ListGroupItem>
                         {currencies.map((currency) => {
                             return (
@@ -26,6 +30,7 @@ export default function CurrencyList({ currencies, deleteItem }) {
                                     key={currency.name}
                                     currency={currency}
                                     deleteItem={deleteItem}
+                                    updateCurrency={updateCurrency}
                                 />
                             );
                         })}

@@ -18,6 +18,9 @@ import Currencies from "./pages/admin/Currencies";
 import Reports from "./pages/admin/Reports";
 import SingleAgency from "./pages/admin/SingleAgency";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import { Route, Routes } from "react-router-dom";
 
 function App() {
@@ -63,11 +66,13 @@ function App() {
 				<Route exact path="/home-admin/reports" element={<Reports />} />
 
 				<Route exact path="/" element={<Login />} />
-				{/* <Route exact path="/forgot/" element={<Forgot/>} /> */}
-				<Route element={<Error />} />
+				{/* <Route exact path="/forgot/" element={Forgot} /> */}
+				<Route path="*" element={<Error />} />
 			</Routes>
+			<ToastContainer autoClose={3000} hideProgressBar />
 		</div>
 	);
 }
 
 export default App;
+

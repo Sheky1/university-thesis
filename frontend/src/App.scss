@@ -18,6 +18,7 @@
 @import "./sass/components/additions.scss";
 @import "./sass/components/modal.scss";
 @import "./sass/components/info.scss";
+@import "./sass/components/pagination.scss";
 
 //layouts
 @import "./sass/layout/error.scss";
@@ -25,3 +26,7 @@
 @import "./sass/layout/footer.scss";
 @import "./sass/layout/navbar.scss";
 @import "./sass/layout/login.scss";
+
+//sidebar
+
+@import "./sass/components/custom.scss";

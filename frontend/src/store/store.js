@@ -4,15 +4,13 @@ import createSagaMiddleware from "redux-saga";
 import { watchLogin } from "./saga";
 
 const initialState = {};
-
 const sagaMiddleware = createSagaMiddleware();
-
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
-    rootReducer,
-    initialState,
-    composeEnhancers(applyMiddleware(sagaMiddleware))
+	rootReducer,
+	initialState,
+	composeEnhancers(applyMiddleware(sagaMiddleware))
 );
 
 sagaMiddleware.run(watchLogin);

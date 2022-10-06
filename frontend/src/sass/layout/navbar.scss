@@ -21,7 +21,7 @@
 
     & img {
         display: block;
-        height: 80px;
+        height: 120px;
         margin: auto;
     }
 
@@ -51,7 +51,6 @@
         padding: 0.3rem 0.5rem;
         display: inline-block;
         text-decoration: none;
-        text-transform: capitalize;
         background-image: linear-gradient(
             120deg,
             transparent 0%,
@@ -68,7 +67,8 @@
             display: inline-block;
         }
 
-        &:hover {
+        &:hover,
+        &__active {
             background-position: 100%;
             background-color: $color-primary;
             color: white;

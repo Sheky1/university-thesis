@@ -3,7 +3,7 @@ import { Row, Container, ListGroup, ListGroupItem } from "react-bootstrap";
 import City from "./City";
 import Loading from "../layout/Loading";
 
-export default function CityList({ cities, deleteItem }) {
+export default function CityList({ cities, deleteItem, updateCity }) {
     if (cities.length === 0) {
         return <Loading />;
     }
@@ -19,7 +19,7 @@ export default function CityList({ cities, deleteItem }) {
                                 color: "whitesmoke",
                             }}
                         >
-                            <span>Trenutno akitvni gradovi:</span>
+                            <span>Trenutno ponuđeni gradovi:</span>
                         </ListGroupItem>
                         {cities.map((city) => {
                             return (
@@ -27,6 +27,7 @@ export default function CityList({ cities, deleteItem }) {
                                     key={city.name}
                                     city={city}
                                     deleteItem={deleteItem}
+                                    updateCity={updateCity}
                                 />
                             );
                         })}

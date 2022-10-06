@@ -8,10 +8,10 @@ const reservationsReducer = (state = initialState, action) => {
             return action.payload;
         case actionTypes.UPDATE_RESERVATION:
             return [
+                action.payload,
                 ...state.filter(
                     (reservation) => reservation.id !== action.payload.id
                 ),
-                action.payload,
             ];
         // case actionTypes.ADD_CURRENCY:
         //     return [...state, action.payload];

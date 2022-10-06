@@ -25,7 +25,6 @@ import java.util.List;
 public class AdditionServiceImpl implements AdditionService {
 
     private final AdditionRepository additionRepository;
-    private final AgencyRepository agencyRepository;
     private final CurrencyRepository currencyRepository;
     private final AdditionMapper additionMapper;
     private final UserDomainRepository userDomainRepository;

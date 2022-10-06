@@ -20,7 +20,7 @@ import java.util.List;
 @ApiResponses(value = {@ApiResponse(responseCode = "403", description = "You don't have the permission to access this endpoint.", content = @Content), @ApiResponse(responseCode = "400", description = "Bad request", content = @Content)})
 public interface VehicleSizeAPI {
 
-    @Operation(summary = "Create vehicle size", description = "This endpoint is for creating a new vehicle size object. ", tags = "Vehicle size")
+    @Operation(summary = "Create vehicle size", description = "This endpoint is for creating a new vehicle size object. ", tags = "Vehicle sizes")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "New vehicle size created",
                     content = {@Content(mediaType = "application/json",
@@ -30,7 +30,7 @@ public interface VehicleSizeAPI {
                             schema = @Schema(implementation = VehicleSizeDto.class))})})
     ResponseEntity<VehicleSizeDto> createVehicleSize(FuelSizeRequestDto fuelSizeRequestDto);
 
-    @Operation(summary = "Update vehicle size", description = "This endpoint is for updating a specific vehicle size object. ", tags = "Vehicle size")
+    @Operation(summary = "Update vehicle size", description = "This endpoint is for updating a specific vehicle size object. ", tags = "Vehicle sizes")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Vehicle size successfully updated",
                     content = {@Content(mediaType = "application/json",
@@ -42,26 +42,26 @@ public interface VehicleSizeAPI {
                             schema = @Schema(implementation = VehicleSizeDto.class))})})
     VehicleSizeDto updateVehicleSize(@PathVariable Long id, @RequestBody FuelSizeRequestDto fuelSizeRequestDto);
 
-    @Operation(summary = "Delete vehicle size", description = "This endpoint is for deleting a vehicle size object. ", tags = "Vehicle size")
+    @Operation(summary = "Delete vehicle size", description = "This endpoint is for deleting a vehicle size object. ", tags = "Vehicle sizes")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Vehicle size deleted successfully",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema())})})
     void deleteVehicleSize(Long id);
 
-    @Operation(summary = "Get vehicle sizes", description = "This endpoint is for getting all available vehicle sizes with pagination.", tags = "Vehicle size")
+    @Operation(summary = "Get vehicle sizes", description = "This endpoint is for getting all available vehicle sizes with pagination.", tags = "Vehicle sizes")
     @ApiResponse(responseCode = "200", description = "All vehicle sizes found",
             content = {@Content(mediaType = "application/json",
                     schema = @Schema(implementation = VehicleSizeDto.class))})
     List<VehicleSizeDto> getAllVehicleSize(@RequestParam(defaultValue = "${pagination.page}") int page, @RequestParam(defaultValue = "${pagination.size}") int size, @RequestParam(defaultValue = "${sorting.field}") SimpleFields field, @RequestParam(defaultValue = "${sorting.direction}") Sort.Direction direction);
 
-    @Operation(summary = "Get vehicle sizes", description = "This endpoint is for getting all available vehicle sizes.", tags = "Vehicle size")
+    @Operation(summary = "Get vehicle sizes", description = "This endpoint is for getting all available vehicle sizes.", tags = "Vehicle sizes")
     @ApiResponse(responseCode = "200", description = "All vehicle sizes found",
             content = {@Content(mediaType = "application/json",
                     schema = @Schema(implementation = VehicleSizeDto.class))})
     List<VehicleSizeDto> getAllVehicleSize();
 
-    @Operation(summary = "Get vehicle size", description = "This endpoint is for getting specific vehicle size object. ", tags = "Vehicle size")
+    @Operation(summary = "Get vehicle size", description = "This endpoint is for getting specific vehicle size object. ", tags = "Vehicle sizes")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Vehicle size successfully found",
                     content = {@Content(mediaType = "application/json",

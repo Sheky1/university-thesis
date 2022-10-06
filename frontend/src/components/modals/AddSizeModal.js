@@ -50,19 +50,20 @@ class AddSizeModal extends Component {
                     size="lg"
                 >
                     <ModalHeader toggle={() => this.props.toggle()}>
-                        Dodavanje velicine
+                        Dodavanje veličine
                     </ModalHeader>
                     <ModalBody>
                         <Form>
-                            <FormGroup row>
+                            <FormGroup row style={{ width: "100%" }}>
                                 <Label for="name" sm={4}>
-                                    Naziv velicine
+                                    Naziv veličine
                                 </Label>
                                 <Col sm={8}>
                                     <Input
                                         type="text"
                                         name="name"
                                         id="name"
+                                        placeholder="Veliko vozilo"
                                         onChange={(e) => {
                                             this.props.handleChange(e);
                                         }}

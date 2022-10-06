@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-import logo from "../../images/logo.png";
+import logo from "../../images/renter_full_color.png";
+import { Button } from "reactstrap";
 import { Link } from "react-router-dom";
 import {
-    // FaChartBar,
     FaCar,
     FaPlus,
-    // FaQuestionCircle,
-    // FaHandsHelping,
     FaBookOpen,
     FaCartPlus,
     FaExpandArrowsAlt,
@@ -15,23 +13,36 @@ import {
 } from "react-icons/fa";
 import AddVehicleModal from "../modals/AddVehicleModal";
 
-export default function Navigation() {
+export default function Navigation(props) {
     const [modal, setModal] = useState(false);
 
     const toggle = () => setModal(!modal);
+
+    const classForButton = window.location.pathname;
+
     return (
         <>
             <AddVehicleModal modal={modal} toggle={toggle} />
             <div className="navbar">
                 <nav className="navbar__nav">
+                    <Button onClick={props.toggle} className="close">
+                        x
+                    </Button>
                     <div className="navbar-logo">
-                        <Link to="/">
+                        <Link to="/home-agency/">
                             <img src={logo} alt="logo" />
                         </Link>
                     </div>
                     <ul className="navbar__list">
                         <li className="navbar__item">
-                            <Link to="/home-agency/" className="navbar__link">
+                            <Link
+                                to="/home-agency/"
+                                className={
+                                    classForButton === "/home-agency/"
+                                        ? "navbar__link navbar__link__active"
+                                        : "navbar__link"
+                                }
+                            >
                                 <span>
                                     <FaCar />
                                 </span>
@@ -50,7 +61,20 @@ export default function Navigation() {
                         <li className="navbar__item">
                             <Link
                                 to="/home-agency/reservations/"
-                                className="navbar__link"
+                                className={
+                                    classForButton ===
+                                    "/home-agency/reservations/"
+                                        ? "navbar__link navbar__link__active"
+                                        : "navbar__link"
+                                }
+                                onClick={
+                                    classForButton ===
+                                    "/home-agency/reservations/"
+                                        ? () => {
+                                              window.location.reload();
+                                          }
+                                        : () => {}
+                                }
                             >
                                 <span>
                                     <FaBookOpen />
@@ -62,7 +86,11 @@ export default function Navigation() {
                         <li className="navbar__item">
                             <Link
                                 to="/home-agency/additions/"
-                                className="navbar__link"
+                                className={
+                                    classForButton === "/home-agency/additions/"
+                                        ? "navbar__link navbar__link__active"
+                                        : "navbar__link"
+                                }
                             >
                                 <span>
                                     <FaCartPlus />
@@ -73,18 +101,26 @@ export default function Navigation() {
                         <li className="navbar__item">
                             <Link
                                 to="/home-agency/sizes/"
-                                className="navbar__link"
+                                className={
+                                    classForButton === "/home-agency/sizes/"
+                                        ? "navbar__link navbar__link__active"
+                                        : "navbar__link"
+                                }
                             >
                                 <span>
                                     <FaExpandArrowsAlt />
                                 </span>
-                                Velicine
+                                Veličine
                             </Link>
                         </li>
                         <li className="navbar__item">
                             <Link
                                 to="/home-agency/fuel/"
-                                className="navbar__link"
+                                className={
+                                    classForButton === "/home-agency/fuel/"
+                                        ? "navbar__link navbar__link__active"
+                                        : "navbar__link"
+                                }
                             >
                                 <span>
                                     <FaGasPump />
@@ -96,39 +132,25 @@ export default function Navigation() {
                         <li className="navbar__item">
                             <Link
                                 to="/home-agency/reports/"
-                                className="navbar__link"
+                                className={
+                                    classForButton === "/home-agency/reports/"
+                                        ? "navbar__link navbar__link__active"
+                                        : "navbar__link"
+                                }
+                                onClick={
+                                    classForButton === "/home-agency/reports/"
+                                        ? () => {
+                                              window.location.reload();
+                                          }
+                                        : () => {}
+                                }
                             >
                                 <span>
                                     <FaChartLine />
                                 </span>
-                                Izvestaji
+                                Izveštaji
                             </Link>
                         </li>
-                        {/* <li className="navbar__item">
-                            <button className="navbar__link">
-                                <span>
-                                    <FaChartBar />
-                                </span>
-                                Statistika
-                            </button>
-                        </li> */}
-                        {/* <hr />
-                        <li className="navbar__item">
-                            <button className="navbar__link">
-                                <span>
-                                    <FaQuestionCircle />
-                                </span>
-                                Help
-                            </button>
-                        </li>
-                        <li className="navbar__item">
-                            <button className="navbar__link">
-                                <span>
-                                    <FaHandsHelping />
-                                </span>
-                                Podrska
-                            </button>
-                        </li> */}
                     </ul>
                 </nav>
             </div>

@@ -2,6 +2,10 @@
     margin-bottom: 30px;
     padding: 2rem;
 
+    @media only screen and (max-width: 768px) {
+        padding: 0.5rem;
+    }
+
     &-text {
         display: flex;
         flex-direction: row;
